@@ -40,7 +40,7 @@ header {
 .auth-buttons button {
     margin-left: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: rgba(40, 103, 58, 1);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -48,7 +48,7 @@ header {
 }
 
 .auth-buttons button:hover {
-    background-color: #0056b3;
+    background-color: rgba(149, 132, 80, 1);
 }
 
 nav {
@@ -68,22 +68,54 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
     display: inline-block;
+    font-size: 20px;
+    font-weight: normal;
+    transition: color 0.3s, font-weight 0.3s;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: #958450;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 main {
     padding: 20px;
+}
+
+main h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.main-image {
+    display: block;
+    margin: 20px auto 50px;
+    max-width: 60%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .homepage-main {
@@ -99,20 +131,38 @@ main {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .homepage-main p {
-    padding: 30px 100px;
+    padding: 15px 100px;
     margin: 0;
 }
 
-main h2 {
-    text-align: center;
-    margin-bottom: 20px;
+.homepage-main p:last-child {
+    margin-bottom: 90px;
 }
 
+.form-section {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_02.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+
+}   
+
 form {
-    max-width: 600px;
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -120,7 +170,8 @@ form {
 
 label {
     margin-top: 10px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 input[type="text"],
@@ -141,21 +192,22 @@ textarea {
 }
 
 input[type="file"] {
-    margin-bottom: 15px;
+    margin: 15px 0px;
 }
 
 button[type="submit"] {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: rgba(40, 103, 58, 1);
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: rgba(149, 132, 80, 1);
 }
 
 footer {
@@ -183,5 +235,5 @@ footer .social-media a {
 }
 
 footer .social-media a:hover {
-    color: #807c07;
+    color: rgba(149, 132, 80, 1);
 }
