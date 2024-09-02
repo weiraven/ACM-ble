@@ -118,6 +118,36 @@ main h2 {
     box-sizing: border-box;
 }
 
+footer {
+    color: #fff;
+    background-color: #000e02;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .legal-info {
+    text-align: left;
+}
+
+footer .social-media {
+    text-align: right;
+}
+
+footer .social-media a {
+    margin: 0 5px;
+    color: #ffffff;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+footer .social-media a:hover {
+    color: rgba(149, 132, 80, 1);
+}
+
+/* Home styles */
+
 .homepage-main {
     min-height: 100vh;
     width: 100%;
@@ -142,6 +172,116 @@ main h2 {
 .homepage-main p:last-child {
     margin-bottom: 90px;
 }
+
+/* Events styles */
+
+.events-main {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_01.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.event-section {
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.event-section ul {
+    list-style: none; /* no bullet points */
+    padding: 0;
+}
+
+.event-section ul li {
+    margin-bottom: 10px;
+}
+
+.event-section ul li a {
+    color: #e1fcd4;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.event-section ul li a:hover {
+    color: #ffee8d; /* Change to desired hover color */
+}
+
+/* Event Detail styles */
+
+.event-details-main {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_05.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.event-details-section {
+    width: 100%;
+    text-align: center;
+}
+
+.event-image-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.event-image {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.event-details {
+    max-width: 700px;
+    color: #fff;
+    text-align: left;
+    margin: 20px auto;
+}
+
+.event-details p {
+    margin: 8px 0;
+}
+
+.event-actions {
+    text-align: center;
+}
+
+.event-actions button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: rgba(40, 103, 58, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.event-actions button:hover {
+    background-color: rgba(149, 132, 80, 1);
+}
+
+/* New Events styles */
 
 .form-section {
     min-height: 100vh;
@@ -208,32 +348,4 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: rgba(149, 132, 80, 1);
-}
-
-footer {
-    color: #fff;
-    background-color: #000e02;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer .legal-info {
-    text-align: left;
-}
-
-footer .social-media {
-    text-align: right;
-}
-
-footer .social-media a {
-    margin: 0 5px;
-    color: #ffffff;
-    font-size: 28px;
-    text-decoration: none;
-}
-
-footer .social-media a:hover {
-    color: rgba(149, 132, 80, 1);
 }
