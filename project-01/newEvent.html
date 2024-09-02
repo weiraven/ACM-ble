@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACM Charlotte Student Chapter | New Event</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Handlee&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/29e7d101cb.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/acm_transparent_bg.png" alt="ACM" class="logo">
+            <div class="title">
+                <h2>Association for Computing Machinery</h2>
+                <h1>UNC Charlotte Student Chapter</h1>
+            </div>
+            <div class="auth-buttons">
+                <button>Login</button>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="newEvent.html">Start a New Event</a></li>
+        </ul>
+    </nav>
+
+    <main class="form-section">
+        <h2>Propose a New Event</h2>
+        <form action="#" method="post">
+            <label for="topic">Topic</label>
+            <input type="text" id="topic" name="topic" placeholder="Enter proposed topic" required>
+            
+            <label for="title">Event Name</label>
+            <input type="text" id="title" name="title" placeholder="Enter proposed title" required>
+            
+            <label for="host">Host</label>
+            <input type="text" id="host" name="host" placeholder="Enter name of host" required>
+            
+            <label for="description">Event Description</label>
+            <textarea id="description" name="description" rows="4" placeholder="Describe your event proposal" required></textarea>
+            
+            <label for="location">Where</label>
+            <input type="text" id="location" name="location" placeholder="Enter the location of the event" required>
+            
+            <label for="date">When</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="start-time">Start Time</label>
+            <input type="time" id="start-time" name="start-time" required>
+            
+            <label for="end-time">End Time</label>
+            <input type="time" id="end-time" name="end-time" required>
+            
+            <label for="documents">Supporting Images or Documents</label>
+            <input type="file" id="documents" name="documents">
+            
+            <button type="submit">Create Event</button>
+        </form>
+    </main>
+
+    <footer>
+        <div class="legal-info">
+            <p>Copyright © 2024. ACM UNC Charlotte Student Chapter.</p>
+        </div>
+        <div class="social-media">
+            <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-square-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-square-youtube"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>

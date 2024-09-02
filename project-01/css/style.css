@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    max-width: 180px;
+    margin-right: 20px;
+}
+
+.title {
+    color:#043c0b;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.auth-buttons {
+    margin-left: auto;
+}
+
+.auth-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: rgba(40, 103, 58, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-buttons button:hover {
+    background-color: rgba(149, 132, 80, 1);
+}
+
+nav {
+    background-color: #000e02;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: normal;
+    transition: color 0.3s, font-weight 0.3s;
+}
+
+nav ul li a:hover {
+    color: #958450;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+main h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.main-image {
+    display: block;
+    margin: 20px auto 50px;
+    max-width: 60%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.homepage-main {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_09.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.homepage-main p {
+    padding: 15px 100px;
+    margin: 0;
+}
+
+.homepage-main p:last-child {
+    margin-bottom: 90px;
+}
+
+.form-section {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_02.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+
+}   
+
+form {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    margin: 15px 0px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: rgba(40, 103, 58, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+button[type="submit"]:hover {
+    background-color: rgba(149, 132, 80, 1);
+}
+
+footer {
+    color: #fff;
+    background-color: #000e02;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .legal-info {
+    text-align: left;
+}
+
+footer .social-media {
+    text-align: right;
+}
+
+footer .social-media a {
+    margin: 0 5px;
+    color: #ffffff;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+footer .social-media a:hover {
+    color: rgba(149, 132, 80, 1);
+}
