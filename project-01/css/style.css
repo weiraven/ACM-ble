@@ -210,6 +210,7 @@ footer .social-media a:hover {
     color: #e1fcd4;
     text-decoration: none;
     font-size: 18px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     transition: color 0.3s;
 }
 
