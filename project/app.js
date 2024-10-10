@@ -43,14 +43,17 @@ app.get('/thankyou', (req, res)=>{
     res.render('thankyou');
 });
 
-app.use('/events', eventRoutes);
+// all events-related routing and functions are handled by eventRoutes.js and eventController.js
+app.use('/events', eventRoutes); 
 
+// at this point if a matching route is not found, we begin error handling
 app.use((req, res, next)=>{
     let err = new Error('The server cannot locate ' + req.url);
     err.status = 404;
     next(err);
 });
 
+// if all else fails, send code 500 response
 app.use((err, req, res, next)=>{
     console.log(err.stack);
     if(!err.status) {
