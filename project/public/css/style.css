@@ -350,3 +350,33 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: rgba(149, 132, 80, 1);
 }
+
+/* Error page styles */
+
+.error-main {
+    min-height: 80vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_09.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.error-main h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.error-main p {
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
