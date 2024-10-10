@@ -342,11 +342,17 @@ label {
     font-weight: 500;
 }
 
+.fa-circle-exclamation {
+    margin-left: 5px;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
 input[type="text"],
 input[type="email"],
-input[type="date"],
-input[type="time"],
-textarea {
+input[type="datetime-local"],
+textarea,
+select {
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 15px;
@@ -377,6 +383,23 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: rgba(149, 132, 80, 1);
+}
+
+/* Contact form section */
+.contact-form-section {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_10.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
 }
 
 /* Error page styles */

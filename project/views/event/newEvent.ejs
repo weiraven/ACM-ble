@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %>
+    <main class="form-section">
+        <h2>Propose a New Event</h2>
+        <form action="/events" method="POST" enctype="multipart/form-data">
+
+            <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
+            <select name="category" id="category" required>
+                <option value="" disabled selected>Event Type</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Tech-Talk">Tech Talk</option>
+                <option value="Panel">Panel</option>
+            </select>
+            
+            <label for="title">Event Name <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="title" name="title" placeholder="Enter proposed title" required>
+
+            <label for="host">Host(s) <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="host" name="hostname" placeholder="Enter host name(s)" required>
+
+            <label for="topic">Topic (Optional)</label>
+            <input type="text" id="topic" name="topic" placeholder="Enter topic if applicable">
+            
+            <label for="speaker">Speaker(s) (Optional)</label>
+            <input type="text" id="speaker" name="speaker" placeholder="Enter speaker name(s) if applicable">
+
+            <label for="details">Event Description <i class="fa-solid fa-circle-exclamation"></i></label>
+            <textarea name="details" id="details" rows="6" placeholder="Please provide a description of the event" required></textarea>
+            
+            <label for="location">Location <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="location" name="location" placeholder="Where will it take place" required>
+
+            <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="datetime-local" id="start" name="start" required>
+
+            <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="datetime-local" id="end" name="end" required>
+
+            <label for="image">Supporting Image (Optional)</label>
+            <input type="file" id="image" name="image">
+
+            <button type="submit">Create Event</button>
+        </form>
+    </main>
+
+<%- include('../partials/footer.ejs') %>
