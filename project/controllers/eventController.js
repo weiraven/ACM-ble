@@ -1,9 +1,17 @@
 const model = require('../models/event');
+const { DateTime } = require('luxon');
 
 exports.index = (req, res)=>{
-    //res.send('Send all events');
-    let events = model.find();
-    res.render('./event/index', {events});
+    let allEvents = model.find();
+    // filter events by category
+    const meetingsAndWorkshops = allEvents.filter(event => event.category === 'Meeting' || event.category === 'Workshop');
+    const techTalksAndPanels = allEvents.filter(event => event.category === 'Tech-Talk' || event.category === 'Panel');
+
+    res.render('./event/index', {
+        meetingsAndWorkshops,
+        techTalksAndPanels,
+        DateTime
+    });
 };
 
 exports.newEvent = (req, res)=>{
