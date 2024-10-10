@@ -20,7 +20,21 @@ exports.newEvent = (req, res)=>{
 
 exports.create = (req, res)=>{
     // res.send('Propose a new event');
-    let event = req.body;
+    let event = {
+        id: uuidv4(),
+        category: req.body.category,
+        title: req.body.title,
+        hostname: req.body.hostname,
+        topic: req.body.topic || null,
+        speaker: req.body.speaker || null,
+        start: DateTime.fromISO(req.body.start).toISO(),
+        end: DateTime.fromISO(req.body.end).toISO(),
+        location: req.body.location,
+        details: req.body.details,
+        image: req.file ? req.file.path : null,
+        createdAt: DateTime.now().toISO()
+    };
+    
     model.save(event);
     res.redirect('/events');
 };
