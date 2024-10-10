@@ -23,6 +23,26 @@ app.get('/', (req, res)=>{
     res.render('index');
 });
 
+app.get('/about', (req, res)=>{
+    res.render('about');
+});
+
+app.get('/contact', (req, res)=>{
+    res.render('contact');
+});
+
+app.post('/contact', (req, res)=>{
+    const { email, subject, message } = req.body;
+    console.log(`Email: ${email}`);
+    console.log(`Subject: ${subject}`);
+    console.log(`Message: ${message}`);
+    res.redirect('/thankyou');
+});
+
+app.get('/thankyou', (req, res)=>{
+    res.render('thankyou');
+});
+
 app.use('/events', eventRoutes);
 
 app.use((req, res, next)=>{
