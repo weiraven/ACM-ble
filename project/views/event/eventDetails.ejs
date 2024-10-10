@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs') %>
+
+    <main class="event-details-main">
+        <div class="container">
+            <section class="event-details-section">
+                <div class="event-image-container">
+                    <img src="<%= event.img || '/img/tech_talk_stage.jpg' %>" alt="<%= event.title %>" class="event-image">
+                </div>
+                <h2><%= event.title %></h2>
+                <div class="event-details">
+                    <% if (event.topic) { %>
+                        <p><strong>Topic:</strong> <%= event.topic %></p>
+                    <% } %>
+                    <% if (event.speaker) { %>
+                        <p><strong>Speaker(s):</strong> <%= event.speaker %></p>
+                    <% } %>
+                    <p><strong>Start:</strong> <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_FULL) %></p>
+                    <p><strong>End:</strong> <%= DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_FULL) %></p>
+                    <p><strong>Where:</strong> <%= event.location %></p>
+                    <p><strong>Details:</strong> <%= event.details %></p>                    
+                    <div class="event-actions">
+                        <button aria-label="Add to calendar"><i class="fa-solid fa-calendar-check"></i></button>
+                        <button aria-label="Edit event"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button aria-label="Delete event"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+
+<%- include('../partials/footer.ejs') %>
