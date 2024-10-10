@@ -30,7 +30,7 @@ exports.show = (req, res, next)=>{
     let event = model.findById(id);
 
     if(event){
-        res.render('./event/eventDetails', {event});
+        res.render('./event/eventDetails', { event, DateTime });
     } else {
         let err = new Error('Cannot find an event with id ' + id);
         err.status = 404;
