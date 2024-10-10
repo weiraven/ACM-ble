@@ -1,0 +1,57 @@
+<%- include('./partials/header.ejs')%>
+  
+    <!-- <div class = "content">
+        <% if(events.length) { %>
+            <% events.forEach(event=>{ %>
+                <a href="/events/<%= event.id%>">
+                    <p><%= event.title %></p>
+                </a>
+            <% });
+        } else { %>
+            <p>There are currently no events scheduled.</p>
+        <% } %>
+    </div> -->
+
+    <main class="events-main">
+        <div class="container">
+            <section class="event-section">
+                <h2>Meeting Schedule</h2>
+                <ul>
+                    <li><a href="eventDetail.html">Career Fair Prep + Resumé Workshop | September 4, 2024</a></li>
+                    <li><a href="eventDetail.html">Frontend Development Tech Talk | September 11, 2024</a></li>
+                    <li><a href="eventDetail.html">Career Fair Postmortem | September 18, 2024</a></li>
+                    <li><a href="eventDetail.html">Leetcode/Pair Programming Practice | September 25, 2024</a></li>
+                    <li><a href="eventDetail.html">CCI Alumni Panel | October 2, 2024</a></li>
+                    <li><a href="eventDetail.html">Cybersecurity Tech Talk + AMA | October 9, 2024</a></li>
+                    <li><a href="eventDetail.html">Leetcode/Pair Programming Practice | October 16, 2024</a></li>
+                    <li><a href="eventDetail.html">Programming Competition Prep Workshop | October 23, 2024</a></li>
+                    <li><a href="eventDetail.html">Happy Hallo-world Social | October 30, 2024</a></li>
+                </ul>
+            </section>
+
+            <section class="event-section">
+                <h2>Tech Talks & Speaker Series</h2>
+                <ul>
+                    <li><a href="eventDetail.html">September 11 - Uriah Jeshurun (CrowdStrike)</a></li>
+                    <li><a href="eventDetail.html">October 2 - Dylan Halstead (RVOH) | Elise Frazier (TIAA) | Tyler Minnis (Lowe's)</a></li>
+                    <li><a href="eventDetail.html">October 9 - Lance Peterman, CIDPRO (Dick's Sporting Goods)</a></li>
+                    <li><a href="eventDetail.html">October 23 - Jaden Peterson (Lucid Software)</a></li>
+                </ul>
+            </section>
+
+            <section class="event-section">
+                <h2>Programming Comptetions & Hackathons</h2>
+                <ul>
+                    <li><a href="https://lucid.co/programming-competition">Lucid Programming Competition | October 26, 2024</a></li>
+                    <li><a href="https://hacknc.com/">HackNC - UNC Chapel Hill | November 2-3, 2024</a></li>
+                    <li><a href="https://sites.radford.edu/~acm/midatl/">ICPC 2024 Mid-Atlantic Regional - NC State University | November 16, 2024</a></li>
+                    <li><a href="https://hoyahacks.georgetown.domains/">Hoya Hacks - Georgetown University | January 24-26, 2024</a></li>
+                    <li><a href="https://hacklytics.io/">Hacklytics - GeorgiaTech | February 7-9, 2025</a></li>
+                    <li><a href="https://hackncstate2024.devpost.com/">Hack_NCState - NC State University | TBA</a></li>
+                </ul>
+            </section>
+            
+        </div>
+    </main>
+
+<%- include('./partials/footer.ejs')%>
