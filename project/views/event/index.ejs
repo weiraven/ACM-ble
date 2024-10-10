@@ -1,46 +1,45 @@
-<%- include('./partials/header.ejs')%>
+<%- include('../partials/header.ejs') %>
   
-    <!-- <div class = "content">
-        <% if(events.length) { %>
-            <% events.forEach(event=>{ %>
-                <a href="/events/<%= event.id%>">
-                    <p><%= event.title %></p>
-                </a>
-            <% });
-        } else { %>
-            <p>There are currently no events scheduled.</p>
-        <% } %>
-    </div> -->
-
     <main class="events-main">
         <div class="container">
             <section class="event-section">
-                <h2>Meeting Schedule</h2>
+                <h2>Regular Meetings & Workshops</h2>
                 <ul>
-                    <li><a href="eventDetail.html">Career Fair Prep + Resumé Workshop | September 4, 2024</a></li>
-                    <li><a href="eventDetail.html">Frontend Development Tech Talk | September 11, 2024</a></li>
-                    <li><a href="eventDetail.html">Career Fair Postmortem | September 18, 2024</a></li>
-                    <li><a href="eventDetail.html">Leetcode/Pair Programming Practice | September 25, 2024</a></li>
-                    <li><a href="eventDetail.html">CCI Alumni Panel | October 2, 2024</a></li>
-                    <li><a href="eventDetail.html">Cybersecurity Tech Talk + AMA | October 9, 2024</a></li>
-                    <li><a href="eventDetail.html">Leetcode/Pair Programming Practice | October 16, 2024</a></li>
-                    <li><a href="eventDetail.html">Programming Competition Prep Workshop | October 23, 2024</a></li>
-                    <li><a href="eventDetail.html">Happy Hallo-world Social | October 30, 2024</a></li>
+                    <% if (meetingsAndWorkshops.length) { %>
+                        <% meetingsAndWorkshops.forEach(event => { %>
+                            <li>
+                                <a href="/events/<%= event.id %>">
+                                    <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                </a>
+                            </li>
+                        <% }); %>
+                    <% } else { %>
+                        <p>There are no events currently scheduled.</p>
+                    <% } %>
                 </ul>
             </section>
 
             <section class="event-section">
-                <h2>Tech Talks & Speaker Series</h2>
+                <h2>Tech Talk & AMA Speaker Series</h2>
                 <ul>
-                    <li><a href="eventDetail.html">September 11 - Uriah Jeshurun (CrowdStrike)</a></li>
-                    <li><a href="eventDetail.html">October 2 - Dylan Halstead (RVOH) | Elise Frazier (TIAA) | Tyler Minnis (Lowe's)</a></li>
-                    <li><a href="eventDetail.html">October 9 - Lance Peterman, CIDPRO (Dick's Sporting Goods)</a></li>
-                    <li><a href="eventDetail.html">October 23 - Jaden Peterson (Lucid Software)</a></li>
+                    <% if (techTalksAndPanels.length) { %>
+                        <% techTalksAndPanels.forEach(event => { %>
+                               <li>
+                                   <a href="/events/<%= event.id %>">
+                                       <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                   </a>
+                               </li>
+                        <% }); %>
+                    <% } else { %>
+                           <p>There are no events currently scheduled.</p>
+                    <% } %>
                 </ul>
             </section>
 
+            <!-- Section for Programming Competitions & Hackathons -->
+            <!-- Leaving this section hardcoded because it provides information outside of ACM's control -->
             <section class="event-section">
-                <h2>Programming Comptetions & Hackathons</h2>
+                <h2>Programming Competitions & Hackathons</h2>
                 <ul>
                     <li><a href="https://lucid.co/programming-competition">Lucid Programming Competition | October 26, 2024</a></li>
                     <li><a href="https://hacknc.com/">HackNC - UNC Chapel Hill | November 2-3, 2024</a></li>
@@ -54,4 +53,4 @@
         </div>
     </main>
 
-<%- include('./partials/footer.ejs')%>
+<%- include('../partials/footer.ejs') %>
