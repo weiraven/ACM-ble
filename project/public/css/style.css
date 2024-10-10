@@ -68,7 +68,7 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 20px;
+    margin: 0 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,9 +77,9 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 8px 0;
     display: inline-block;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: normal;
     transition: color 0.3s, font-weight 0.3s;
 }
@@ -105,7 +105,7 @@ main h2 {
 .main-image {
     display: block;
     margin: 20px auto 50px;
-    max-width: 60%;
+    max-width: 55%;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
@@ -170,6 +170,33 @@ footer .social-media a:hover {
 }
 
 .homepage-main p:last-child {
+    margin-bottom: 90px;
+}
+
+/* About styles */
+
+.about-main {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_03.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.about-main p {
+    padding: 15px 100px;
+    margin: 0;
+}
+
+.about-main p:last-child {
     margin-bottom: 90px;
 }
 
@@ -316,6 +343,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="date"],
 input[type="time"],
 textarea {
@@ -380,3 +408,34 @@ button[type="submit"]:hover {
     font-size: 1.5rem;
     text-align: center;
 }
+
+/* Thank you page styles */
+
+.thankyou-section {
+    min-height: 80vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_12.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.thankyou-section h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.thankyou-section p {
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
