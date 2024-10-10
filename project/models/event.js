@@ -16,6 +16,8 @@ const events = [
         category: 'Workshop',
         title: 'Career Fair Prep + Resumé Workshop',
         hostname: 'ACM',
+        topic: null,
+        speaker: null,
         start: DateTime.fromFormat('5:30 PM, September 4, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, September 4, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -26,20 +28,24 @@ const events = [
     {
         id: '2',
         category: 'Tech-Talk',
-        title: 'Frontend Development Tech Talk with Uriah Jeshurun',
+        title: 'Journey Through Frontend Development',
         hostname: 'ACM',
+        topic: 'Frontend Development Tech Talk & AMA',
+        speaker: 'Uriah Jeshurun (Crowd Strike)',
         start: DateTime.fromFormat('5:30 PM, September 11, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, September 11, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Sociosqu imperdiet odio blandit posuere bibendum scelerisque. Sollicitudin nam senectus leo efficitur viverra. Justo magnis accumsan lobortis faucibus tellus metus per tincidunt. Condimentum nisl montes; magnis turpis bibendum blandit placerat. Luctus faucibus nostra nostra duis metus. Egestas integer conubia tincidunt cubilia, arcu potenti potenti. Platea sapien conubia maecenas aenean efficitur nostra praesent vitae? Efficitur tempus lorem curae nullam mauris in.',
-        image: null, // this will be a file path to the where the image is uploaded eventually
+        image: '/img/tech_talk_stage.jpg', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     },
     {
         id: '3',
         category: 'Meeting',
-        title: 'Career Fair Postmortem + Liam C. Talkback',
+        title: 'Career Fair Postmortem + Student Survey Talkback',
         hostname: 'ACM',
+        topic: null,
+        speaker: 'Liam C.',
         start: DateTime.fromFormat('5:30 PM, September 18, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, September 18, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -52,6 +58,8 @@ const events = [
         category: 'Meeting',
         title: 'Leetcode/Pair Programming Practice',
         hostname: 'ACM',
+        topic: null,
+        speaker: null,
         start: DateTime.fromFormat('5:30 PM, September 25, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, September 25, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -62,8 +70,10 @@ const events = [
     {
         id: '5',
         category: 'Panel',
-        title: 'CCI Alumni Panel',
+        title: 'CCI Grads with Jobs Panel',
         hostname: 'ACM',
+        topic: 'Alumni Panel',
+        speaker: "Elise Frazier (TIAA), Tyler Minnis (Lowe's Tech), and Dylan Halstead (RVO Health)",
         start: DateTime.fromFormat('5:30 PM, October 2, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, October 2, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -74,8 +84,10 @@ const events = [
     {
         id: '6',
         category: 'Tech-Talk',
-        title: 'Cybersecurity Tech Talk with Lance Peterman',
+        title: 'Lessons from the Field as a Cybersecurity Professional',
         hostname: 'ACM',
+        topic: 'Cybersecurity Tech Talk & AMA',
+        speaker: 'Lance Peterman, CIDPRO',
         start: DateTime.fromFormat('5:30 PM, October 9, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, October 9, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -88,6 +100,8 @@ const events = [
         category: 'Meeting',
         title: 'Leetcode/Pair Programming Practice',
         hostname: 'ACM',
+        topic: null,
+        speaker: null,
         start: DateTime.fromFormat('5:30 PM, October 16, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, October 16, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -100,6 +114,8 @@ const events = [
         category: 'Workshop',
         title: 'Lucid Programming Competition Prep Workshop',
         hostname: 'ACM',
+        topic: 'Coding Competition Preparation & SWE Tech Talk',
+        speaker: 'Jaden Peterson (Lucid)',
         start: DateTime.fromFormat('5:30 PM, October 23, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, October 23, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -112,6 +128,8 @@ const events = [
         category: 'Meeting',
         title: 'Happy Hallo-world Social',
         hostname: 'ACM',
+        topic: null,
+        speaker: null,
         start: DateTime.fromFormat('5:30 PM, October 30, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         end: DateTime.fromFormat('7:30 PM, October 30, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
@@ -123,12 +141,7 @@ const events = [
 
 exports.find = () => events;
 exports.findById = function(id) {
-    let event = events.find(event => event.id === id);
-    if(event) {
-        event.start = DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_FULL);
-        event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_FULL);
-    }
-    return event;
+    return events.find(event => event.id === id);
 };
 
 exports.save = function(event) {
