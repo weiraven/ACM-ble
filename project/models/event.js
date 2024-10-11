@@ -154,21 +154,29 @@ exports.save = function(event) {
 
 exports.updateById = function(id, newEvent) {
     let event = events.find(event=>event.id === id);
-    if(event) {
+    if (event) {
+        event.category = newEvent.category;
         event.title = newEvent.title;
+        event.hostname = newEvent.hostname;
+        event.topic = newEvent.topic || null;
+        event.speaker = newEvent.speaker || null;
+        event.start = newEvent.start;
+        event.end = newEvent.end;
+        event.location = newEvent.location;
         event.details = newEvent.details;
+        event.image = newEvent.image || event.image;
         return true;
     } else {
         return false;
     }
-}
+};
 
 exports.deleteById = function(id) {
     let index = events.findIndex(event=>event.id === id);
-    if(index !== -1) {
+    if (index !== -1) {
         events.splice(index, 1);
         return true;
     } else {
         return false;
     }
-}
+};
