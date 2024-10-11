@@ -8,6 +8,8 @@
                 </div>
                 <h2><%= event.title %></h2>
                 <div class="event-details">
+                    <p><strong>Hosted by:</strong> <%= event.hostname %></p>
+                    <p><strong>Location:</strong> <%= event.location %></p>
                     <% if (event.topic) { %>
                         <p><strong>Topic:</strong> <%= event.topic %></p>
                     <% } %>
@@ -16,16 +18,26 @@
                     <% } %>
                     <p><strong>Start:</strong> <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_FULL) %></p>
                     <p><strong>End:</strong> <%= DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_FULL) %></p>
-                    <p><strong>Where:</strong> <%= event.location %></p>
                     <p><strong>Details:</strong> <%= event.details %></p>                    
-                    <div class="event-actions">
-                        <button aria-label="Add to calendar"><i class="fa-solid fa-calendar-check"></i></button>
-                        <button aria-label="Edit event"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button aria-label="Delete event"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
                 </div>
             </section>
-            
+        </div>
+        <div class="event-actions">
+            <form>
+                <button type="submit" aria-label="Add to calendar">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </button>
+            </form>
+            <form action="/events/<%= event.id %>/edit" method="GET">
+                <button type="submit" aria-label="Edit Event">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+            </form>
+            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+                <button type="submit" aria-label="Delete Event">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
         </div>
     </main>
 

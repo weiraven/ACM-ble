@@ -1,0 +1,48 @@
+<%- include('../partials/header.ejs') %>
+
+    <main class="form-section">
+        <h2>Edit Event</h2>
+        <form method="POST" action="/events/<%= event.id %>?_method=PUT">
+
+            <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
+            <select name="category" id="category" required>
+                <option value="Meeting" <%= event.category === 'Meeting' ? 'selected' : '' %>>Meeting</option>
+                <option value="Workshop" <%= event.category === 'Workshop' ? 'selected' : '' %>>Workshop</option>
+                <option value="Tech-Talk" <%= event.category === 'Tech-Talk' ? 'selected' : '' %>>Tech Talk</option>
+                <option value="Panel" <%= event.category === 'Panel' ? 'selected' : '' %>>Panel</option>
+            </select>
+            
+            <label for="title">Event Name <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="title" name="title" value="<%= event.title %>" required>
+
+            <label for="host">Host(s) <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="host" name="hostname" value="<%= event.hostname %>" required>
+
+            <label for="topic">Topic (Optional)</label>
+            <input type="text" id="topic" name="topic" value="<%= event.topic || '' %>">
+            
+            <label for="speaker">Speaker(s) (Optional)</label>
+            <input type="text" id="speaker" name="speaker" value="<%= event.speaker || '' %>">
+
+            <label for="details">Event Description <i class="fa-solid fa-circle-exclamation"></i></label>
+            <textarea name="details" id="details" rows="6" required><%= event.details %></textarea>
+            
+            <label for="location">Location <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="text" id="location" name="location" value="<%= event.location %>" required>
+
+            <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="datetime-local" id="start" name="start" value="<%= DateTime.fromISO(event.start).toFormat('yyyy-MM-dd\'T\'HH:mm') %>" required>
+
+            <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
+            <input type="datetime-local" id="end" name="end" value="<%= DateTime.fromISO(event.end).toFormat('yyyy-MM-dd\'T\'HH:mm') %>" required>
+
+            <label for="image">Supporting Image (Optional)</label>
+            <input type="hidden" name="existingImage" value="<%= event.image %>">
+            <input type="file" id="image" name="image">
+
+            <button type="submit">Update Event</button>
+
+        </form>
+    </main>
+
+<%- include('../partials/footer.ejs') %>
