@@ -31,14 +31,13 @@ cd project
 npm install
 ```
 
-or if using nodemon for live-loading during development:
-```
-nodemon app
-```
-
 4. **Start the application**
 ```
 npm start
+```
+or if using nodemon for live-loading during development:
+```
+nodemon app
 ```
 
 5. **Open in your browser**
