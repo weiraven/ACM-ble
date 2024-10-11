@@ -1,7 +1,7 @@
 <%- include('../partials/header.ejs') %>
     <main class="form-section">
         <h2>Propose a New Event</h2>
-        <form action="/events" method="POST">
+        <form action="/events" method="POST" enctype="multipart/form-data">
 
             <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
             <select name="category" id="category" required>
@@ -37,7 +37,7 @@
             <input type="datetime-local" id="end" name="end" required>
 
             <label for="image">Supporting Image (Optional)</label>
-            <input type="file" id="image" name="image">
+            <input type="file" id="image" name="image" accept="image/*">
 
             <button type="submit">Create Event</button>
         </form>

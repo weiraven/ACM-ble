@@ -2,7 +2,7 @@
 
     <main class="form-section">
         <h2>Edit Event</h2>
-        <form method="POST" action="/events/<%= event.id %>?_method=PUT">
+        <form method="POST" action="/events/<%= event.id %>?_method=PUT" enctype="multipart/form-data">
 
             <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
             <select name="category" id="category" required>
@@ -36,9 +36,16 @@
             <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
             <input type="datetime-local" id="end" name="end" value="<%= DateTime.fromISO(event.end).toFormat('yyyy-MM-dd\'T\'HH:mm') %>" required>
 
-            <label for="image">Supporting Image (Optional)</label>
+            <label for="currentImage">Current Image</label>
+            <% if (event.image) { %>
+                <img src="/img/<%= event.image %>" alt="Current image" style="max-width: 100px;">
+            <% } else { %>
+                <p>This event currently does not have a unique image.</p>
+            <% } %>
+            
+            <label for="image">Update Image (Optional)</label>
             <input type="hidden" name="existingImage" value="<%= event.image %>">
-            <input type="file" id="image" name="image">
+            <input type="file" id="image" name="image" accept="image/*">
 
             <button type="submit">Update Event</button>
 
