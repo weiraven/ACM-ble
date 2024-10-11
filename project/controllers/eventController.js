@@ -7,10 +7,12 @@ exports.index = (req, res)=>{
     // filter events by category
     const meetingsAndWorkshops = allEvents.filter(event => event.category === 'Meeting' || event.category === 'Workshop');
     const techTalksAndPanels = allEvents.filter(event => event.category === 'Tech-Talk' || event.category === 'Panel');
+    const miscellaneousEvents = allEvents.filter(event => event.category === 'Other');
 
     res.render('./event/index', {
         meetingsAndWorkshops,
         techTalksAndPanels,
+        miscellaneousEvents,
         DateTime
     });
 };
