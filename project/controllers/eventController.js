@@ -1,4 +1,5 @@
 const model = require('../models/event');
+const { v4: uuidv4 } = require('uuid');
 const { DateTime } = require('luxon');
 
 exports.index = (req, res)=>{
@@ -21,14 +22,15 @@ exports.newEvent = (req, res)=>{
 exports.create = (req, res)=>{
     // res.send('Propose a new event');
     let event = {
+
         id: uuidv4(),
         category: req.body.category,
         title: req.body.title,
         hostname: req.body.hostname,
         topic: req.body.topic || null,
         speaker: req.body.speaker || null,
-        start: DateTime.fromISO(req.body.start).toISO(),
-        end: DateTime.fromISO(req.body.end).toISO(),
+        start: req.body.start,
+        end: req.body.end,
         location: req.body.location,
         details: req.body.details,
         image: req.file ? req.file.path : null,
@@ -42,6 +44,8 @@ exports.create = (req, res)=>{
 exports.show = (req, res, next)=>{
     let id = req.params.id;
     let event = model.findById(id);
+
+    console.log(event);
 
     if(event){
         res.render('./event/eventDetails', { event, DateTime });
@@ -57,7 +61,7 @@ exports.edit = (req, res, next)=>{
     let event = model.findById(id);
 
     if(event) {
-        res.render('./event/edit', {event});
+        res.render('./event/edit', { event, DateTime });
     } else {
         let err = new Error('Cannot find an event with id ' + id);
         err.status = 404;
@@ -66,10 +70,23 @@ exports.edit = (req, res, next)=>{
 };
 
 exports.update = (req, res, next)=>{
-    let event = req.body;
+    console.log('Form submitted');
+    console.log(req.body);
     let id = req.params.id;
+    let updatedEvent = {
+        category: req.body.category,
+        title: req.body.title,
+        hostname: req.body.hostname,
+        topic: req.body.topic || null,
+        speaker: req.body.speaker || null,
+        start: req.body.start,
+        end: req.body.end,
+        location: req.body.location,
+        details: req.body.details,
+        image: req.file ? req.file.path : req.body.existingImage
+    };
 
-    if(model.updateById(id, event)) {
+    if(model.updateById(id, updatedEvent)) {
         res.redirect('/events/' + id);
     } else {
         let err = new Error('Cannot find an event with id ' + id);
