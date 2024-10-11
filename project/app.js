@@ -1,7 +1,10 @@
-// require modules
+// required modules
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+
+// import routes
+const mainRoutes = require('./routes/mainRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 
 // create app
@@ -18,32 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 
-// set up routes
-app.get('/', (req, res)=>{
-    res.render('index');
-});
+// use mainRoutes.js for home, about, contact
+app.use('/', mainRoutes);
 
-app.get('/about', (req, res)=>{
-    res.render('about');
-});
-
-app.get('/contact', (req, res)=>{
-    res.render('contact');
-});
-
-app.post('/contact', (req, res)=>{
-    const { email, subject, message } = req.body;
-    console.log(`Email: ${email}`);
-    console.log(`Subject: ${subject}`);
-    console.log(`Message: ${message}`);
-    res.redirect('/thankyou');
-});
-
-app.get('/thankyou', (req, res)=>{
-    res.render('thankyou');
-});
-
-// all events-related routing and functions are handled by eventRoutes.js and eventController.js
+// events-related routing and functions are handled by eventRoutes.js and eventController.js
 app.use('/events', eventRoutes); 
 
 // at this point if a matching route is not found, we begin error handling
@@ -60,7 +41,6 @@ app.use((err, req, res, next)=>{
         err.status = 500;
         err.message = ("Internal Server Error");
     }
-
     res.status(err.status);
     res.render('error', {error: err});
 });
