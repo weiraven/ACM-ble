@@ -2,7 +2,6 @@
   
     <main class="events-main">
         <div class="container">
-            <img src="/img/coder_group_with_laptops.jpg" alt="Group of students programming" class="main-image">
             <section class="event-section">
                 <h2>Regular Meetings & Workshops</h2>
                 <ul>
@@ -36,6 +35,22 @@
                     <% } %>
                 </ul>
             </section>
+
+            <!-- Section only appears if there are events in the Other category -->
+            <% if (miscellaneousEvents.length) { %>
+                <section class="event-section">
+                    <h2>Miscellaneous Happenings</h2>
+                    <ul>
+                        <% miscellaneousEvents.forEach(event => { %>
+                            <li>
+                                <a href="/events/<%= event.id %>">
+                                    <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                </a>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </section>
+            <% } %>
 
             <!-- Section for Programming Competitions & Hackathons -->
             <!-- Leaving this section hardcoded because it provides information outside of ACM's control -->
