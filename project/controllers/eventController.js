@@ -24,7 +24,6 @@ exports.newEvent = (req, res)=>{
 exports.create = (req, res)=>{
     // res.send('Propose a new event');
     let event = {
-
         id: uuidv4(),
         category: req.body.category,
         title: req.body.title,
@@ -72,8 +71,8 @@ exports.edit = (req, res, next)=>{
 };
 
 exports.update = (req, res, next)=>{
-    console.log('Form submitted');
-    console.log(req.body);
+    // console.log('Form submitted');
+    // console.log(req.body);
     let id = req.params.id;
     let updatedEvent = {
         category: req.body.category,

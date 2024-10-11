@@ -1,7 +1,10 @@
+// required modules
 const express = require('express');
-const controller = require('../controllers/eventController');
-const {fileUpload} = require('../middleware/fileUpload');
 const router = express.Router();
+const {fileUpload} = require('../middleware/fileUpload');
+
+// import controller
+const controller = require('../controllers/eventController');
 
 // GET /events: send all events to the user
 router.get('/', controller.index);
