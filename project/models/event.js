@@ -1,15 +1,6 @@
 const { DateTime } = require("luxon");
 const {v4: uuidv4} = require('uuid');
 
-// id– unique identifier for the event
-// category
-// title 
-// host name
-// start date/time: value for this attribute should be a string in the format of yyyy-mm-ddTmm:ss. 
-// end date/time: value for this attribute should be a string in the format of yyyy-mm-ddTmm:ss. 
-// details
-// image - stores the file path to the file in the project directory
-
 const events = [
     {
         id: '1',
@@ -36,7 +27,7 @@ const events = [
         end: DateTime.fromFormat('7:30 PM, September 11, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Sociosqu imperdiet odio blandit posuere bibendum scelerisque. Sollicitudin nam senectus leo efficitur viverra. Justo magnis accumsan lobortis faucibus tellus metus per tincidunt. Condimentum nisl montes; magnis turpis bibendum blandit placerat. Luctus faucibus nostra nostra duis metus. Egestas integer conubia tincidunt cubilia, arcu potenti potenti. Platea sapien conubia maecenas aenean efficitur nostra praesent vitae? Efficitur tempus lorem curae nullam mauris in.',
-        image: '/img/tech_talk_stage.jpg', // this will be a file path to the where the image is uploaded eventually
+        image: '/img/frontend_dev.jpg', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     },
     {
@@ -78,7 +69,7 @@ const events = [
         end: DateTime.fromFormat('7:30 PM, October 2, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Potenti arcu sollicitudin consectetur, conubia donec magna. Tempus nulla mi netus diam suspendisse, iaculis cursus leo. Finibus mattis mus morbi dolor facilisi mus? Sit nisl tortor nunc auctor nibh sagittis netus. Pulvinar vestibulum velit turpis at rhoncus pretium diam. Posuere cursus aptent euismod curabitur a suspendisse.',
-        image: null, // this will be a file path to the where the image is uploaded eventually
+        image: '/img/alums_in_tech_panel.jpg', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     },
     {
@@ -92,7 +83,7 @@ const events = [
         end: DateTime.fromFormat('7:30 PM, October 9, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Vehicula ex erat id, parturient facilisis sodales. Dictumst morbi dignissim cursus ex natoque. Litora fringilla proin pretium interdum lectus ligula montes id lorem. Tortor adipiscing turpis adipiscing pharetra in, justo porta suscipit. Ante cursus amet viverra amet, mi dapibus justo natoque? Gravida sit gravida fames amet, maximus conubia curabitur. Neque nisi sapien penatibus vulputate amet odio tortor montes vivamus. Nec libero nibh hac amet curae maecenas ridiculus?',
-        image: null, // this will be a file path to the where the image is uploaded eventually
+        image: '/img/cybersecurity_tech_talk.jpg', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     },
     {
@@ -120,7 +111,7 @@ const events = [
         end: DateTime.fromFormat('7:30 PM, October 23, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Mi etiam convallis a, dictum litora posuere velit penatibus sed. Fusce vulputate porta, imperdiet imperdiet per sollicitudin erat elit. Magna nascetur laoreet inceptos praesent nisi id natoque sem. Mollis dictum erat diam sodales luctus ridiculus fames fames turpis. Ultrices praesent habitant a finibus ligula dapibus mollis aliquet tellus. Nullam magna habitant risus congue pulvinar erat adipiscing? Massa fusce habitant ac nulla penatibus mollis ad faucibus? Apretium convallis nec ex magnis. Erat malesuada ad condimentum molestie vestibulum purus turpis cursus morbi. Erat pellentesque vitae iaculis posuere praesent est nam nostra.',
-        image: null, // this will be a file path to the where the image is uploaded eventually
+        image: '/img/lucid_programming.png', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     },
     {
@@ -134,7 +125,7 @@ const events = [
         end: DateTime.fromFormat('7:30 PM, October 30, 2024', 'h:mm a, MMMM d, yyyy').toISO(),
         location: 'Woodward 154',
         details: 'Tempus pulvinar viverra class non sodales ex. Faucibus blandit lacus amet potenti phasellus neque dapibus sed. Faucibus elementum leo maecenas curabitur viverra dui tincidunt. Nulla mauris ultrices ut; integer bibendum cursus eleifend lacinia in. Ipsum eleifend leo interdum vitae vitae non faucibus. Faucibus consectetur sodales massa adipiscing vestibulum dignissim sociosqu phasellus. Mauris cras nam facilisis facilisi varius natoque netus. Nascetur enim faucibus sapien nulla, rutrum nam. Blandit convallis nostra tincidunt nibh convallis.',
-        image: null, // this will be a file path to the where the image is uploaded eventually
+        image: '/img/happy_hallo-world.png', // this will be a file path to the where the image is uploaded eventually
         createdAt: DateTime.fromISO('2024-08-30T12:48:00').toISO() // hardcoded to the start of the project in case I need it later
     }
 ];

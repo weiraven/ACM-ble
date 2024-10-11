@@ -33,7 +33,7 @@ exports.create = (req, res)=>{
         end: req.body.end,
         location: req.body.location,
         details: req.body.details,
-        image: req.file ? req.file.path : null,
+        image: req.file ? req.file.filename : null,
         createdAt: DateTime.now().toISO()
     };
     
@@ -83,7 +83,7 @@ exports.update = (req, res, next)=>{
         end: req.body.end,
         location: req.body.location,
         details: req.body.details,
-        image: req.file ? req.file.path : req.body.existingImage
+        image: req.file ? req.file.filename : req.body.existingImage
     };
 
     if(model.updateById(id, updatedEvent)) {
