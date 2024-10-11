@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 
 // mount middleware
 app.use(express.static('public'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 
