@@ -321,6 +321,11 @@ button[type="submit"]:hover {
     background-color: rgba(149, 132, 80, 1);
 }
 
+form p {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
 /* Event Detail styles */
 
 .event-details-main {
@@ -395,7 +400,7 @@ button[type="submit"]:hover {
     font-size: 18px;
 }
 
-/* Contact form section */
+/* Contact styles */
 .contact-form-section {
     min-height: 100vh;
     width: 100%;
