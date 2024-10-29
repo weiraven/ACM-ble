@@ -26,7 +26,7 @@
             <input type="text" id="speaker" name="speaker" value="<%= event.speaker || '' %>">
 
             <label for="details">Event Description <i class="fa-solid fa-circle-exclamation"></i></label>
-            <textarea name="details" id="details" rows="6" required><%= event.details %></textarea>
+            <textarea name="details" id="details" rows="6" required minlength="10"><%= event.details %></textarea>
             
             <label for="location">Location <i class="fa-solid fa-circle-exclamation"></i></label>
             <input type="text" id="location" name="location" value="<%= event.location %>" required>

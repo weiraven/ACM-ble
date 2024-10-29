@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 
 // import routes
 const mainRoutes = require('./routes/mainRoutes');
@@ -14,6 +15,17 @@ const app = express();
 let port = 3000;
 let host = 'localhost';
 app.set('view engine', 'ejs');
+const mongoUri = 'mongodb+srv://admin:asdfasdf@cluster0.egwbf.mongodb.net/acm?retryWrites=true&w=majority&appName=Cluster0';
+
+// connect to MongoDB Atlas
+mongoose.connect(mongoUri)
+.then(() => {
+    // start the server
+    app.listen(port, host, ()=>{
+    console.log('Server is running on port', port);
+    });
+})
+.catch(err => console.log(err.message));
 
 // mount middleware
 app.use(express.static('public'));
@@ -44,8 +56,3 @@ app.use((err, req, res, next)=>{
     res.status(err.status);
     res.render('error', {error: err});
 });
-
-// start the server
-app.listen(port, host, ()=>{
-    console.log('Server is running on port', port);
-})
