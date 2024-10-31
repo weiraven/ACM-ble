@@ -1,109 +1,144 @@
 const model = require('../models/event');
-const { v4: uuidv4 } = require('uuid');
-const { DateTime } = require('luxon');
 
-exports.index = (req, res)=>{
-    let allEvents = model.find();
-    // filter events by category
-    const meetingsAndWorkshops = allEvents.filter(event => event.category === 'Meeting' || event.category === 'Workshop');
-    const techTalksAndPanels = allEvents.filter(event => event.category === 'Tech-Talk' || event.category === 'Panel');
-    const miscellaneousEvents = allEvents.filter(event => event.category === 'Other');
+exports.index = async (req, res, next) => {
+    try {
+        // retrieve all events from MongoDB 
+        const allEvents = await model.find();
+        
+        // categorize events by type
+        const meetingsAndWorkshops = allEvents.filter(event => event.category === 'Meeting' || event.category === 'Workshop');
+        const techTalksAndPanels = allEvents.filter(event => event.category === 'Tech-Talk' || event.category === 'Panel');
+        const miscellaneousEvents = allEvents.filter(event => event.category === 'Other');
 
-    res.render('./event/index', {
-        meetingsAndWorkshops,
-        techTalksAndPanels,
-        miscellaneousEvents,
-        DateTime
-    });
+        // render events list view with events sorted by category
+        res.render('./event/index', {
+            meetingsAndWorkshops,
+            techTalksAndPanels,
+            miscellaneousEvents
+        });
+    } catch(err) {
+        next(err); // pass any errors to error handler middleware
+    }
 };
 
 exports.newEvent = (req, res)=>{
+    // render form view for submitting new events
     res.render('./event/newEvent');
 };
 
-exports.create = (req, res)=>{
-    // res.send('Propose a new event');
-    let event = {
-        id: uuidv4(),
-        category: req.body.category,
-        title: req.body.title,
-        hostname: req.body.hostname,
-        topic: req.body.topic || null,
-        speaker: req.body.speaker || null,
-        start: req.body.start,
-        end: req.body.end,
-        location: req.body.location,
-        details: req.body.details,
-        image: req.file ? req.file.filename : null,
-        createdAt: DateTime.now().toISO()
-    };
-    
-    model.save(event);
-    res.redirect('/events');
-};
-
-exports.show = (req, res, next)=>{
-    let id = req.params.id;
-    let event = model.findById(id);
-
-    console.log(event);
-
-    if(event){
-        res.render('./event/eventDetails', { event, DateTime });
-    } else {
-        let err = new Error('Cannot find an event with id ' + id);
-        err.status = 404;
-        next(err);
+exports.create = async (req, res, next) => {
+    try {
+        // create a new event with inputs from req.body and save to MongoDB
+        let event = new model(req.body);        
+        await event.save();
+        res.redirect('/events'); // redirect to index view after successful save
+    } catch(err) {
+        if(err.name === 'ValidationError') {
+            err.status = 400; // send error code 400 for validation errors
+        }
+        next(err); // pass any other errors to error handler middleware
     }
 };
 
-exports.edit = (req, res, next)=>{
+exports.show = async (req, res, next) => {
     let id = req.params.id;
-    let event = model.findById(id);
 
-    if(event) {
-        res.render('./event/edit', { event, DateTime });
-    } else {
-        let err = new Error('Cannot find an event with id ' + id);
-        err.status = 404;
-        next(err);
+    // check if ID format is a valid 24-bit hex string
+    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+
+    try {
+        // find the event by ID in MongoDB
+        let event = await model.findById(id); // find event by id
+        if(event) {
+            res.render('./event/eventDetails', {event}); // render event details view if found
+        } else {
+            let err = new Error('Cannot find an event with id ' + id);
+            err.status = 404;
+            next(err); // send error 404 if no event is found
+        }
+    } catch(err) {
+        next(err); // pass any other errors to error handler middleware
     }
 };
 
-exports.update = (req, res, next)=>{
-    // console.log('Form submitted');
-    // console.log(req.body);
+exports.edit = async (req, res, next) => {
     let id = req.params.id;
-    let updatedEvent = {
-        category: req.body.category,
-        title: req.body.title,
-        hostname: req.body.hostname,
-        topic: req.body.topic || null,
-        speaker: req.body.speaker || null,
-        start: req.body.start,
-        end: req.body.end,
-        location: req.body.location,
-        details: req.body.details,
-        image: req.file ? req.file.filename : req.body.existingImage
-    };
 
-    if(model.updateById(id, updatedEvent)) {
-        res.redirect('/events/' + id);
-    } else {
-        let err = new Error('Cannot find an event with id ' + id);
-        err.status = 404;
-        next(err);
+    // check if ID format is a valid 24-bit hex string
+    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+
+    try {
+        // find event by id and render edit view if found
+        let event = await model.findById(id);
+        if(event) {
+            res.render('./event/edit', {event});
+        } else {
+            let err = new Error('Cannot find an event with id ' + id);
+            err.status = 404;
+            next(err); // send error 404 if no event is found
+        }
+    } catch(err) {
+        next(err); // pass any other errors to error handler middleware
     }
 };
 
-exports.delete = (req, res, next)=>{
-    // res.send('delete event with id ' + req.params.id);
+exports.update = async (req, res, next) => {
     let id = req.params.id;
-    if(model.deleteById(id)) {
-        res.redirect('/events');
-    } else {
-        let err = new Error('Cannot find an event with id ' + id);
-        err.status = 404;
-        next(err);
+
+    // check if ID format is a valid 24-bit hex string
+    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+
+    try {
+        // update the event with input from req.body and run validators
+        let event = await model.findByIdAndUpdate(id, req.body, { new: true, runValidators: true});
+        if(event) {
+            res.redirect('/events/' + id); // redirect to event details view if update is successful
+        } else {
+            let err = new Error('Cannot find an event with id ' + id);
+            err.status = 404; // send error 404 if no event is found
+            next(err); 
+        }
+    } catch(err) {
+        if(err.name === 'ValidationError') {
+            err.status = 400; // send error code 400 for validation errors
+        }
+        next(err); // pass any other errors to error handler middleware
+    }
+};
+
+exports.delete = async (req, res, next) => {
+    let id = req.params.id;
+
+    // check if ID format is a valid 24-bit hex string
+    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+
+    try {
+        // delete the event if found and redirect back to events list view
+        let event = await model.findByIdAndDelete(id);
+        if(event) {
+            res.redirect('/events');
+        } else {
+            let err = new Error('Cannot find an event with id ' + id);
+            err.status = 404; // send error 404 if no event is found
+            next(err);
+        }
+    } catch(err) {
+        next(err); // pass any other errors to error handler middleware
     }
 };
