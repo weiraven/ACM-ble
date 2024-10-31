@@ -1,3 +1,5 @@
+// Ensure end times are after start times
+
 document.addEventListener("DOMContentLoaded", function() {
     const startInput = document.getElementById('start');
     const endInput = document.getElementById('end');
