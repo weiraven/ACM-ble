@@ -23,11 +23,34 @@ const eventSchema = new Schema({
     },
     start: {
         type: Date, 
-        required: [true, 'Event start time is required']
+        required: [true, 'Event start time is required'],
+        validate: {
+            validator: function(value) {
+                // ensure that start time is no earlier than January 1, 2024
+                return value >= new Date('2024-01-01T00:00:00');
+            },
+            message: 'Event cannot be scheduled from before January 1, 2024'
+        }
     },
     end: {
         type: Date, 
-        required: [true, 'Event end time is required']
+        required: [true, 'Event end time is required'],
+        validate: [
+            {
+                validator: function(value) {
+                    // ensure that start time is no earlier than January 1, 2024
+                    return value >= new Date('2024-01-01T00:00:00');
+                },
+                message: 'Event cannot be scheduled from before January 1, 2024'
+            },
+            {
+                validator: function(value) {
+                    // check if end time is at least 1 hour after start time
+                    return this.start && value >= new Date(this.start.getTime() + 60 * 60 * 1000);
+                },
+                message: 'Event end time must be at least 1 hour after the start time'
+            }
+        ]
     },
     location: {
         type: String, 
