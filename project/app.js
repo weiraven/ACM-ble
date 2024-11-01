@@ -17,15 +17,30 @@ let host = 'localhost';
 app.set('view engine', 'ejs');
 const mongoUri = 'mongodb+srv://admin:asdfasdf@cluster0.egwbf.mongodb.net/acm?retryWrites=true&w=majority&appName=Cluster0';
 
+// mongoose.connect(mongoUri)
+// .then(() => {
+//     // start the server
+//     app.listen(port, host, ()=>{
+//     console.log(`Server is running on http://${host}:${port}`);
+//     });
+// })
+// .catch(err => console.log(err.message));
+
 // connect to MongoDB Atlas
-mongoose.connect(mongoUri)
-.then(() => {
-    // start the server
-    app.listen(port, host, ()=>{
-    console.log('Server is running on port', port);
-    });
-})
-.catch(err => console.log(err.message));
+// refactored to an Immediately Invoked Async Function (IIFE)
+(async () => {
+    try {
+        await mongoose.connect(mongoUri);
+        console.log('Connected to MongoDB Atlas');
+        //start the server
+        app.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
+        });
+    } catch (err) {
+        console.error('Database connection error:', err.message);
+    }
+})();
+
 
 // mount middleware
 app.use(express.static('public'));
