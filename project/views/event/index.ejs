@@ -9,7 +9,7 @@
                         <% meetingsAndWorkshops.forEach(event => { %>
                             <li>
                                 <a href="/events/<%= event.id %>">
-                                    <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                    <%= event.title %> | <%= event.start.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                                 </a>
                             </li>
                         <% }); %>
@@ -26,7 +26,7 @@
                         <% techTalksAndPanels.forEach(event => { %>
                                <li>
                                    <a href="/events/<%= event.id %>">
-                                       <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                       <%= event.title %> | <%= event.start.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                                    </a>
                                </li>
                         <% }); %>
@@ -44,7 +44,7 @@
                         <% miscellaneousEvents.forEach(event => { %>
                             <li>
                                 <a href="/events/<%= event.id %>">
-                                    <%= event.title %> | <%= DateTime.fromISO(event.start).toLocaleString(DateTime.DATE_FULL) %>
+                                    <%= event.title %> | <%= event.start.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                                 </a>
                             </li>
                         <% }); %>

@@ -1,4 +1,6 @@
 <%- include('../partials/header.ejs') %>
+<script src="/js/eventTimeValidation.js"></script>
+
     <main class="form-section">
         <h2>Propose a New Event</h2>
         <form action="/events" method="POST" enctype="multipart/form-data">
@@ -32,10 +34,10 @@
             <input type="text" id="location" name="location" placeholder="Where will it take place" required>
 
             <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="start" name="start" required>
+            <input type="datetime-local" id="start" name="start" min="2024-01-01T00:00" required>
 
             <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="end" name="end" required>
+            <input type="datetime-local" id="end" name="end" min="2024-01-01T00:00" required>
 
             <label for="image">Supporting Image (Optional)</label>
             <input type="file" id="image" name="image" accept="image/*">

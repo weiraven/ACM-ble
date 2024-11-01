@@ -1,4 +1,5 @@
 <%- include('../partials/header.ejs') %>
+<script src="/js/eventTimeValidation.js"></script>
 
     <main class="form-section">
         <h2>Edit Event</h2>
@@ -32,20 +33,21 @@
             <input type="text" id="location" name="location" value="<%= event.location %>" required>
 
             <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="start" name="start" value="<%= DateTime.fromISO(event.start).toFormat('yyyy-MM-dd\'T\'HH:mm') %>" required>
+            <input type="datetime-local" id="start" name="start" min="2024-01-01T00:00" value="<%= new Date(event.start).toISOString().slice(0, 16) %>" required>
 
             <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="end" name="end" value="<%= DateTime.fromISO(event.end).toFormat('yyyy-MM-dd\'T\'HH:mm') %>" required>
+            <input type="datetime-local" id="end" name="end" min="2024-01-01T00:00" value="<%= new Date(event.end).toISOString().slice(0, 16) %>" required>
 
             <label for="currentImage">Current Image</label>
             <% if (event.image) { %>
-                <img src="/img/<%= event.image %>" alt="Current image" style="max-width: 100px;">
+                <!-- Display Base64 image from MongoDB if available -->
+                <img src="data:image/jpeg;base64,<%= event.image %>" alt="<%= event.title %>" style="max-width: 100px;">
             <% } else { %>
                 <p>This event currently does not have a unique image.</p>
             <% } %>
             
             <label for="image">Update Image (Optional)</label>
-            <input type="hidden" name="existingImage" value="<%= event.image %>">
+            <input type="hidden" name="existingImage" value="<%= event.image ? 'true' : '' %>">
             <input type="file" id="image" name="image" accept="image/*">
 
             <button type="submit">Update Event</button>
