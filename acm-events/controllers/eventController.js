@@ -28,6 +28,9 @@ exports.newEvent = (req, res)=>{
 
 exports.create = async (req, res, next) => {
     try {
+        if (!req.body.hostname) {
+            req.body.hostname = 'ACM'; // set hostname to ACM if not otherwise specified
+        }
         // create a new event with inputs from req.body and save to MongoDB
         let event = new model(req.body);        
         await event.save();

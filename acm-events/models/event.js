@@ -12,7 +12,7 @@ const eventSchema = new Schema({
         required: [true, 'Event title is required']
     },
     hostname: {
-        type: String, 
+        type: String,
         default: 'ACM'
     },
     topic: {

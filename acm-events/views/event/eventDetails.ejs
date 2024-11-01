@@ -14,14 +14,10 @@
                 </div>
                 <h2><%= event.title %></h2>
                 <div class="event-details">
-                    <p><strong>Hosted by:</strong> <%= event.hostname %></p>
+                    <p><strong>Hosted by:</strong> <%= event.hostname || 'ACM' %></p>
                     <p><strong>Location:</strong> <%= event.location %></p>
-                    <% if (event.topic) { %>
-                        <p><strong>Topic:</strong> <%= event.topic %></p>
-                    <% } %>
-                    <% if (event.speaker) { %>
-                        <p><strong>Speaker(s):</strong> <%= event.speaker %></p>
-                    <% } %>
+                    <p><strong>Topic:</strong> <%= event.topic || 'N/A' %></p>
+                    <p><strong>Speaker(s):</strong> <%= event.speaker || 'N/A' %></p>
                     <p><strong>Start:</strong> 
                         <%= event.start.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                         at 
