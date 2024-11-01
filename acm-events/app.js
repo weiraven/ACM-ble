@@ -1,3 +1,6 @@
+// load environment variables
+require('dotenv').config();
+
 // required modules
 const express = require('express');
 const morgan = require('morgan');
@@ -12,22 +15,12 @@ const eventRoutes = require('./routes/eventRoutes');
 const app = express();
 
 // configure app
-let port = 3000;
-let host = 'localhost';
+let port = process.env.PORT || 3000;
+let host = process.env.HOST || 'localhost';
 app.set('view engine', 'ejs');
-const mongoUri = 'mongodb+srv://admin:asdfasdf@cluster0.egwbf.mongodb.net/acm?retryWrites=true&w=majority&appName=Cluster0';
-
-// mongoose.connect(mongoUri)
-// .then(() => {
-//     // start the server
-//     app.listen(port, host, ()=>{
-//     console.log(`Server is running on http://${host}:${port}`);
-//     });
-// })
-// .catch(err => console.log(err.message));
+const mongoUri = process.env.MONGO_URI;
 
 // connect to MongoDB Atlas
-// refactored to an Immediately Invoked Async Function (IIFE)
 (async () => {
     try {
         await mongoose.connect(mongoUri);
