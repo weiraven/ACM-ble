@@ -101,8 +101,29 @@ exports.update = async (req, res, next) => {
     }
 
     try {
-        // update the event with input from req.body and run validators
-        let event = await model.findByIdAndUpdate(id, req.body, { new: true, runValidators: true});
+        let updatedData = req.body;
+
+        // check if a new image was submitted
+        if (req.file) {
+            // convert the new image to Base64 and save it to event
+            updatedData.image = req.file.buffer.toString('base64');
+        } else if (req.body.existingImage === 'true') {
+            // continue to use existing image if no new image is uploaded
+            let event = await model.findById(id);
+            if(event) {
+                updatedData.image = event.image;
+            } else {
+                let err = new Error('Cannot find an event with id ' + id);
+                err.status = 404;
+                return next(err);
+            }
+        } else {
+            // set image to null if no image is provided
+            updatedData.image = null;
+        }
+
+        // update the event with updatedData and run validators
+        let event = await model.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true});
         if(event) {
             res.redirect('/events/' + id); // redirect to event details view if update is successful
         } else {
