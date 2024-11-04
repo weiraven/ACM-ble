@@ -34,7 +34,6 @@ const mongoUri = process.env.MONGO_URI;
     }
 })();
 
-
 // mount middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
