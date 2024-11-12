@@ -6,10 +6,14 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 
 // import routes
 const mainRoutes = require('./routes/mainRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // create app
 const app = express();
@@ -35,6 +39,8 @@ const mongoUri = process.env.MONGO_URI;
 })();
 
 // mount middleware
+
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));

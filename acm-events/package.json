@@ -1,8 +1,18 @@
 {
+  "author": "Raven Wei",
+  "license": "MIT",
+  "name": "acm-events-app",
+  "version": "1.0.0",
+  "description": "An event management and meet-up platform designed for the UNC Charlotte Student Chapter of ACM. It allows users to create, edit, and manage events, upload event-related images, and display event details on a user-friendly interface.",
+  "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "method-override": "^3.0.0",
     "mongoose": "^8.7.3",
     "morgan": "^1.10.0",
