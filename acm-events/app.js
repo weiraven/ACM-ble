@@ -39,7 +39,21 @@ const mongoUri = process.env.MONGO_URI;
 })();
 
 // mount middleware
+app.use(session({
+    secret: 'scht0lteheimReinb4chthe3rd',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {maxAge: 60*60*1000},
+    store: new MongoStore({mongoUrl: mongoUri})
+}));
 
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    res.locals.successMessages = req.flash('success');
+    res.locals.errorMessages = req.flash('error');
+    next();
+});
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
