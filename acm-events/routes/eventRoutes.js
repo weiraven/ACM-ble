@@ -1,11 +1,9 @@
-// required modules
+// required controller and modules
 const express = require('express');
+const controller = require('../controllers/eventController');
 const {fileUpload} = require('../middleware/fileUpload');
 const {isLoggedIn, isHost} = require('../middleware/auth');
 const {validateEventId} = require('../middleware/valdiator')
-
-// import controller
-const controller = require('../controllers/eventController');
 
 const router = express.Router();
 
