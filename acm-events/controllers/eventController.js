@@ -44,17 +44,8 @@ exports.create = async (req, res, next) => {
 };
 
 exports.show = async (req, res, next) => {
-    let id = req.params.id;
-
-    // check if ID format is a valid 24-bit hex string
-    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid event id');
-        err.status = 400;
-        return next(err);
-    }
-
     try {
-        // find the event by ID in MongoDB
+        let id = req.params.id;
         let event = await model.findById(id); // find event by id
         if(event) {
             res.render('./event/eventDetails', {event}); // render event details view if found
@@ -69,17 +60,9 @@ exports.show = async (req, res, next) => {
 };
 
 exports.edit = async (req, res, next) => {
-    let id = req.params.id;
-
-    // check if ID format is a valid 24-bit hex string
-    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid event id');
-        err.status = 400;
-        return next(err);
-    }
-
     try {
         // find event by id and render edit view if found
+        let id = req.params.id;
         let event = await model.findById(id);
         if(event) {
             res.render('./event/edit', {event});
@@ -94,15 +77,6 @@ exports.edit = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
-    let id = req.params.id;
-
-    // check if ID format is a valid 24-bit hex string
-    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid event id');
-        err.status = 400;
-        return next(err);
-    }
-
     try {
         let updatedData = req.body;
 
@@ -112,6 +86,7 @@ exports.update = async (req, res, next) => {
             updatedData.image = req.file.buffer.toString('base64');
         } else if (req.body.existingImage === 'true') {
             // continue to use existing image if no new image is uploaded
+            let id = req.params.id;
             let event = await model.findById(id);
             if(event) {
                 updatedData.image = event.image;
@@ -143,17 +118,9 @@ exports.update = async (req, res, next) => {
 };
 
 exports.delete = async (req, res, next) => {
-    let id = req.params.id;
-
-    // check if ID format is a valid 24-bit hex string
-    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid event id');
-        err.status = 400;
-        return next(err);
-    }
-
     try {
         // delete the event if found and redirect back to events list view
+        let id = req.params.id;
         let event = await model.findByIdAndDelete(id);
         if(event) {
             res.redirect('/events');
