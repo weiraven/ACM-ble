@@ -1,0 +1,19 @@
+<%- include('../partials/header.ejs')%>
+
+    <h2>Welcome, <%=user.firstName%></h2>
+    <% if(events.length) { %>
+        <p>You have created the following events:</p>
+        <% events.forEach(story => { %>
+            <a href='/events/<%= event.id %>'>
+                <p>
+                    <%= event.title %>
+                </p>
+            </a>
+        <% });
+    } else { %>
+        <p>You have not proposed any events.</p>
+    <% } %>
+    </div>
+</body>
+
+<%- include('../partials/footer.ejs')%>
