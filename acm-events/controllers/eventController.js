@@ -28,11 +28,9 @@ exports.newEvent = (req, res)=>{
 
 exports.create = async (req, res, next) => {
     try {
-        if (!req.body.hostname) {
-            req.body.hostname = 'ACM'; // set hostname to ACM if not otherwise specified
-        }
+        req.body.hostname = req.session.user;
         // create a new event with inputs from req.body and save to MongoDB
-        let event = new model(req.body);        
+        let event = new model(req.body);    
         await event.save();
         res.redirect('/events'); // redirect to index view after successful save
     } catch(err) {
@@ -45,12 +43,12 @@ exports.create = async (req, res, next) => {
 
 exports.show = async (req, res, next) => {
     try {
-        let id = req.params.id;
-        let event = await model.findById(id); // find event by id
+        let eventId = req.params.id;
+        let event = await model.findById(eventId).populate('hostname', 'firstName lastName'); // find event by id
         if(event) {
-            res.render('./event/eventDetails', {event}); // render event details view if found
+            res.render('./event/eventDetails', { event }); // render event details view if found
         } else {
-            let err = new Error('Cannot find an event with id ' + id);
+            let err = new Error('Cannot find an event with id ' + eventId);
             err.status = 404;
             next(err); // send error 404 if no event is found
         }
@@ -61,37 +59,36 @@ exports.show = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
     try {
-        // find event by id and render edit view if found
-        let id = req.params.id;
-        let event = await model.findById(id);
+        // Find event by id and render edit view if found
+        let eventId = req.params.id;
+        let event = await model.findById(eventId).populate('hostname', 'firstName lastName');
         if(event) {
-            res.render('./event/edit', {event});
+            res.render('./event/edit', { event });
         } else {
-            let err = new Error('Cannot find an event with id ' + id);
+            let err = new Error('Cannot find an event with id ' + eventId);
             err.status = 404;
-            next(err); // send error 404 if no event is found
+            next(err); // Send error 404 if no event is found
         }
     } catch(err) {
-        next(err); // pass any other errors to error handler middleware
+        next(err); // Pass any other errors to error handler middleware
     }
 };
 
 exports.update = async (req, res, next) => {
     try {
+        let eventId = req.params.id;
         let updatedData = req.body;
-
         // check if a new image was submitted
         if (req.file) {
             // convert the new image to Base64 and save it to event
             updatedData.image = req.file.buffer.toString('base64');
         } else if (req.body.existingImage === 'true') {
             // continue to use existing image if no new image is uploaded
-            let id = req.params.id;
-            let event = await model.findById(id);
+            let event = await model.findById(eventId);
             if(event) {
                 updatedData.image = event.image;
             } else {
-                let err = new Error('Cannot find an event with id ' + id);
+                let err = new Error('Cannot find an event with id ' + eventId);
                 err.status = 404;
                 return next(err);
             }
@@ -101,11 +98,12 @@ exports.update = async (req, res, next) => {
         }
 
         // update the event with updatedData and run validators
-        let event = await model.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true});
+        updatedData.hostname = req.session.user;
+        let event = await model.findByIdAndUpdate(eventId, updatedData, { new: true, runValidators: true});
         if(event) {
-            res.redirect('/events/' + id); // redirect to event details view if update is successful
+            res.redirect('/events/' + eventId); // redirect to event details view if update is successful
         } else {
-            let err = new Error('Cannot find an event with id ' + id);
+            let err = new Error('Cannot find an event with id ' + eventId);
             err.status = 404; // send error 404 if no event is found
             next(err); 
         }
@@ -120,12 +118,12 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         // delete the event if found and redirect back to events list view
-        let id = req.params.id;
-        let event = await model.findByIdAndDelete(id);
+        let eventId = req.params.id;
+        let event = await model.findByIdAndDelete(eventId);
         if(event) {
             res.redirect('/events');
         } else {
-            let err = new Error('Cannot find an event with id ' + id);
+            let err = new Error('Cannot find an event with id ' + eventId);
             err.status = 404; // send error 404 if no event is found
             next(err);
         }
