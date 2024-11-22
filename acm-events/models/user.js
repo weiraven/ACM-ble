@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const userSchema = new Schema({
     firstName: { type: String, required: [true, 'First name is required.']},
     lastName: { type: String, required: [true, 'Last name is required.']},
@@ -8,17 +8,25 @@ const userSchema = new Schema({
     password: { type: String, required: [true, 'Password is required.']}
 });
 
-userSchema.pre('save', function(next){
+userSchema.pre('save', function (next) {
     let user = this;
-    if(!user.isModified('password')){
+
+    if (!user.password) {
+        console.error('Password is missing!');
+        return next(new Error('Password is required.'));
+    }
+
+    if (!user.isModified('password')) {
         return next();
     }
-    bcrypt.hash(user.password)
-    .then(hash => {
-        user.password = hash;
-        next();
-    })
-    .catch(err => next(err))
+
+    bcrypt
+        .hash(user.password, 10) // Add a second argument for hashing rounds
+        .then(hash => {
+            user.password = hash;
+            next();
+        })
+        .catch(err => next(err));
 });
 
 userSchema.methods.comparePassword = function(inputPassword) {
