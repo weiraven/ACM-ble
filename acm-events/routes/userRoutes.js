@@ -21,6 +21,6 @@ router.post('/login', isGuest, controller.loginUser);
 router.get('/profile', isLoggedIn, controller.profile);
 
 // POST /users/logout: log user out
-router.get('/logout', isLoggedIn, controller.logout);
+router.post('/logout', isLoggedIn, controller.logout);
 
 module.exports = router;
