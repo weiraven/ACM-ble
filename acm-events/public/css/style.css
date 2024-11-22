@@ -37,7 +37,7 @@ header {
     margin-left: auto;
 }
 
-.auth-buttons button {
+.auth-buttons a {
     margin-left: 10px;
     padding: 10px 20px;
     background-color: rgba(40, 103, 58, 1);
@@ -47,7 +47,7 @@ header {
     cursor: pointer;
 }
 
-.auth-buttons button:hover {
+.auth-buttons a:hover {
     background-color: rgba(149, 132, 80, 1);
 }
 
@@ -88,6 +88,36 @@ nav ul li a:hover {
     color: #958450;
     font-weight: bold;
     text-decoration: none;
+}
+
+.success, .error {
+    position: relative; /* position close button in message box */
+    background: rgba(108, 192, 112, 0.7);
+    color: #fff;
+    width: 70%;
+    text-align: center;
+    padding: 10px 10px;
+    margin-top: 20px;
+}
+
+.error {
+    background: rgba(255, 102, 51, 0.7);
+}
+
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+.close-btn:hover {
+    color: #ccc;
 }
 
 main {
