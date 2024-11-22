@@ -21,8 +21,13 @@
                 <h1>UNC Charlotte Student Chapter</h1>
             </div>
             <div class="auth-buttons">
-                <button>Login</button>
-                <button>Sign Up</button>
+                <% if(!user) { %>
+                    <a href="/users/login">Login</a>
+                    <a href="/users/new">Sign Up</a>
+                <% } else { %>
+                    <a href="/users/profile">Profile</a>
+                    <a href="/users/logout">Logout</a>
+                <% } %>
             </div>
         </div>
     </header>
@@ -36,3 +41,22 @@
             <li><a href="/contact">Contact Us</a></li>
         </ul>
     </nav>
+
+    <div class = "flash-content">
+
+        <% if(errorMessages.length > 0 || successMessages.length > 0) { %>
+            <% errorMessages.forEach(message => { %>
+                <div class="error">
+                    <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <%= message %>
+                </div>
+            <% }); %>
+
+        <% successMessages.forEach(message => { %>
+                <div class="success">
+                    <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <%= message %>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
