@@ -66,23 +66,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 
-// use mainRoutes.js for home, about, contact
+// Use mainRoutes.js for home, about, contact
 app.use('/', mainRoutes);
 
-// use userRoutes.js for new user creation, login, profile, and logout
+// Use userRoutes.js for new user creation, login, profile, and logout
 app.use('/users', userRoutes)
 
-// events-related routing and functions are handled by eventRoutes.js and eventController.js
+// Events-related routing and functions are handled by eventRoutes.js and eventController.js
 app.use('/events', eventRoutes); 
 
-// at this point if a matching route is not found, we begin error handling
+// At this point if a matching route is not found, we begin error handling
 app.use((req, res, next)=>{
     let err = new Error('The server cannot locate ' + req.url);
     err.status = 404;
     next(err);
 });
 
-// if all else fails, send code 500 response
+// If all else fails, send code 500 response
 app.use((err, req, res, next)=>{
     console.log(err.stack);
     if(!err.status) {
