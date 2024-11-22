@@ -1,7 +1,7 @@
-// load environment variables
+// Load environment variables
 require('dotenv').config();
 
-// required modules
+// Required modules
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
@@ -10,40 +10,46 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 
-// import routes
+// Import routes
 const mainRoutes = require('./routes/mainRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-// create app
+// Create app
 const app = express();
 
-// configure app
+// Configure app
 let port = process.env.PORT || 3000;
 let host = process.env.HOST || 'localhost';
 app.set('view engine', 'ejs');
 const mongoUri = process.env.MONGO_URI;
 
-// connect to MongoDB Atlas
+// Connect to MongoDB Atlas
 (async () => {
     try {
         await mongoose.connect(mongoUri);
         console.log('Connected to MongoDB Atlas');
-        //start the server
+
+        // Detect if app is running in production or development
+        const isNodemon = process.argv[0].includes('nodemon');
+        const mode = process.env.NODE_ENV || 'development';
+        const runner = isNodemon ? 'nodemon' : 'node';
+
+        // Start the server
         app.listen(port, host, () => {
-            console.log(`Server is running on http://${host}:${port}`);
+            console.log(`Server is running in ${mode} with ${runner} on http://${host}:${port}`);
         });
     } catch (err) {
         console.error('Database connection error:', err.message);
     }
 })();
 
-// mount middleware
+// Mount middleware
 app.use(session({
     secret: 'scht0lteheimReinb4chthe3rd',
     resave: false,
     saveUninitialized: false,
-    cookie: {maxAge: 60*60*1000},
+    cookie: {maxAge: 60*60*1000, secure: process.env.NODE_ENV === 'production'},
     store: new MongoStore({mongoUrl: mongoUri})
 }));
 
@@ -62,6 +68,9 @@ app.use(methodOverride('_method'));
 
 // use mainRoutes.js for home, about, contact
 app.use('/', mainRoutes);
+
+// use userRoutes.js for new user creation, login, profile, and logout
+app.use('/users', userRoutes)
 
 // events-related routing and functions are handled by eventRoutes.js and eventController.js
 app.use('/events', eventRoutes); 
