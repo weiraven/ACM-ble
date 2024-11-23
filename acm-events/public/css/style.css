@@ -45,10 +45,50 @@ header {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .auth-buttons a:hover {
     background-color: rgba(149, 132, 80, 1);
+}
+
+.flash-content {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 60; 
+    width: 100%;
+    z-index: 1000;
+}
+
+.success, .error {
+    position: relative;
+    background: rgba(64, 164, 69);
+    color: #fff;
+    width: 65%;
+    text-align: center;
+    padding: 10px 10px;
+    margin-top: 20px;
+}
+
+.error {
+    background: rgb(252, 90, 41);
+}
+
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+.close-btn:hover {
+    color: #ccc;
 }
 
 nav {
@@ -57,6 +97,7 @@ nav {
     top: 0;
     z-index: 1000;
     width: 100%;
+    margin-top: 0;
 }
 
 nav ul {
@@ -90,36 +131,6 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-.success, .error {
-    position: relative; /* position close button in message box */
-    background: rgba(108, 192, 112, 0.7);
-    color: #fff;
-    width: 70%;
-    text-align: center;
-    padding: 10px 10px;
-    margin-top: 20px;
-}
-
-.error {
-    background: rgba(255, 102, 51, 0.7);
-}
-
-.close-btn {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 0 5px;
-}
-
-.close-btn:hover {
-    color: #ccc;
-}
-
 main {
     padding: 20px;
 }
@@ -134,7 +145,7 @@ main h2 {
 
 .main-image {
     display: block;
-    margin: 20px auto 50px;
+    margin: 60px auto 50px;
     max-width: 55%;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -316,6 +327,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 input[type="datetime-local"],
 textarea,
 select {
@@ -430,8 +442,155 @@ form p {
     font-size: 18px;
 }
 
+/* User styles*/
+.signup-form {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_10.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.signup-form .name-fields {
+    display: flex;
+    gap: 10px; /* Space between the two input fields */
+}
+
+.signup-form .name-fields .name-field {
+    flex: 1 1 0; /* Each field takes up half the width */
+    max-width: 50%;
+}
+
+.signup-form .name-fields .name-field input[type="text"] {
+    width: 100%; /* Ensure input fields fit their container */
+    box-sizing: border-box; /* Include padding and borders in width */
+}
+
+.signup-form .name-fields .name-field label {
+    display: block; /* Ensure labels are above the input fields */
+}
+
+.login-form {
+    min-height: calc(100vh - 180px);
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_03.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.user-profile {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(2, 77, 22, 0.4), rgba(4, 0, 48, 0.8)), url(../img/digital_binary_glowing_data_07.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    box-sizing: border-box;
+}
+
+.user-events {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.user-events h4 {
+    font-size: 20px;
+    color: #e1fcd4;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.event-item:hover {
+    background-color: rgba(40, 103, 58, 0.7);
+    border-color: rgba(149, 132, 80, 0.8);
+    transform: scale(1.02); /* Slightly enlarges the box */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.event-content {
+    flex: 1; 
+    display: block;
+}
+
+.event-content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.event-content p {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.event-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.event-actions button {
+    padding: 5px 10px;
+    background-color: rgba(40, 103, 58, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.event-actions button:hover {
+    background-color: rgba(149, 132, 80, 1);
+}
+
+.event-actions button i {
+    font-size: 16px;
+}
+
+
 /* Contact styles */
-.contact-form-section {
+.contact-form {
     min-height: 100vh;
     width: 100%;
     background-image: linear-gradient(rgba(0, 23, 6, 0.2), rgba(0, 0, 0, 0.8)), url(../img/digital_binary_glowing_data_10.jpg);
