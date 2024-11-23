@@ -40,19 +40,21 @@
                 </button>
             </form>
 
-            <!-- Edit event -->
-            <form action="/events/<%= event.id %>/edit" method="GET">
-                <button type="submit" aria-label="Edit Event">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </button>
-            </form>
+            <% if (isHost) { %>
+                <!-- Edit event -->
+                <form action="/events/<%= event.id %>/edit" method="GET">
+                    <button type="submit" aria-label="Edit Event">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                </form>
 
-            <!-- Delete event -->
-            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
-                <button type="submit" aria-label="Delete Event">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-            </form>
+                <!-- Delete event -->
+                <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+                    <button type="submit" aria-label="Delete Event">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </form>
+            <% } %>
         </div>
     </main>
 
