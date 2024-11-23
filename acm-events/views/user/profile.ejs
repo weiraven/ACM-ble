@@ -1,19 +1,80 @@
 <%- include('../partials/header.ejs')%>
 
-    <h2>Welcome, <%=user.firstName%></h2>
-    <% if(events.length) { %>
-        <p>You have created the following events:</p>
-        <% events.forEach(story => { %>
-            <a href='/events/<%= event.id %>'>
-                <p>
-                    <%= event.title %>
-                </p>
-            </a>
-        <% });
-    } else { %>
-        <p>You have not proposed any events.</p>
+<main class="user-profile">
+    <h2>Welcome <%= user.firstName %>!</h2>
+    <% if (events.length) { %>
+        <section class="user-events">
+            <h4>My Upcoming Events</h4>
+            <% 
+                const currentDate = new Date();
+                const futureEvents = events.filter(event => new Date(event.start) > currentDate);
+                const pastEvents = events.filter(event => new Date(event.start) <= currentDate);
+            %>
+            <% if (futureEvents.length) { %>
+                <% futureEvents.forEach(event => { %>
+                    <div class="event-item">
+                        <div class="event-content">
+                            <a href="/events/<%= event.id %>">
+                                <p>
+                                    <strong><%= event.title %></strong><br>
+                                    <%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="event-actions">
+                            <form action="/events/<%= event.id %>/edit" method="GET">
+                                <button type="submit" aria-label="Edit Event">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </form>
+                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+                                <button type="submit" aria-label="Delete Event">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>                    
+                <% }); %>
+            <% } else { %>
+                <p>You don't have any upcoming events.</p>
+            <% } %>
+        </section>
+
+        <section class="user-events">
+            <h4>My Past Events</h4>
+            <% if (pastEvents.length) { %>
+                <% pastEvents.forEach(event => { %>
+                    <div class="event-item">
+                        <div class="event-content">
+                            <a href="/events/<%= event.id %>">
+                                <p>
+                                    <strong><%= event.title %></strong><br>
+                                    <%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="event-actions">
+                            <form action="/events/<%= event.id %>/edit" method="GET">
+                                <button type="submit" aria-label="Edit Event">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </form>
+                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+                                <button type="submit" aria-label="Delete Event">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                 
+                <% }); %>
+            <% } else { %>
+                <p>You don't have any past events.</p>
+            <% } %>
+        </section>
+    <% } else { %>
+        <p>You aren't hosting any events.</p>
     <% } %>
-    </div>
-</body>
+</main>
 
 <%- include('../partials/footer.ejs')%>
