@@ -1,7 +1,8 @@
-// required controller and modules
+// Required controller and modules
 const express = require('express');
 const controller = require('../controllers/userController');
-const {isGuest, isLoggedIn} = require('../middleware/auth');
+const { isGuest, isLoggedIn } = require('../middleware/auth');
+const { validatePassword } = require('../middleware/validator');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const router = express.Router();
 router.get('/new', isGuest, controller.showSignUp);
 
 // POST /users: create a new user account
-router.post('/', isGuest, controller.createUser);
+router.post('/', isGuest, validatePassword, controller.createUser);
 
 // GET /users/login: send view for logging in
 router.get('/login', isGuest, controller.showLogin);
@@ -20,7 +21,7 @@ router.post('/login', isGuest, controller.loginUser);
 // GET /users/profile: send user profile page
 router.get('/profile', isLoggedIn, controller.profile);
 
-// POST /users/logout: log user out
-router.post('/logout', isLoggedIn, controller.logout);
+// GET /users/logout: request end user session
+router.get('/logout', isLoggedIn, controller.logout);
 
 module.exports = router;
