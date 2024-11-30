@@ -27,7 +27,7 @@
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
                             </form>
-                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
+                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
                                 <button type="submit" aria-label="Delete Event">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
