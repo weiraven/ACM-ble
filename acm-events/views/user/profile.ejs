@@ -2,79 +2,106 @@
 
 <main class="user-profile">
     <h2>Welcome <%= user.firstName %>!</h2>
-    <% if (events.length) { %>
-        <section class="user-events">
-            <h4>My Upcoming Events</h4>
-            <% 
-                const currentDate = new Date();
-                const futureEvents = events.filter(event => new Date(event.start) > currentDate);
-                const pastEvents = events.filter(event => new Date(event.start) <= currentDate);
-            %>
+
+    <section class="user-events">
+        <h4>My RSVPs</h4>
+        <% if (rsvps.length) { %>
+            <% rsvps.forEach(rsvp => { %>
+                <div class="event-item">
+
+                    <div class="event-info">
+                        <a href="/events/<%= rsvp.event._id %>">
+                            <p class="event-title"><%= rsvp.event.title %></p>
+                            <p class="event-date"><%= new Date(rsvp.event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                        </a>
+                    </div>
+
+                    <div class="event-actions">
+                        <form action="/events/<%= rsvp.event._id %>/rsvp" method="POST">
+                            <input type="hidden" name="source" value="profile">
+                            <input type="hidden" name="status" value="YES">
+                            <button type="submit" class="<%= rsvp.status === 'YES' ? 'selected' : '' %>">Yes</button>
+                        </form>
+                        <form action="/events/<%= rsvp.event._id %>/rsvp" method="POST">
+                            <input type="hidden" name="source" value="profile">
+                            <input type="hidden" name="status" value="MAYBE">
+                            <button type="submit" class="<%= rsvp.status === 'MAYBE' ? 'selected' : '' %>">Maybe</button>
+                        </form>
+                        <form action="/events/<%= rsvp.event._id %>/rsvp" method="POST">
+                            <input type="hidden" name="source" value="profile">
+                            <input type="hidden" name="status" value="NO">
+                            <button type="submit" class="<%= rsvp.status === 'NO' ? 'selected' : '' %>">No</button>
+                        </form>
+                    </div>                   
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>You haven't RSVPed for any events.</p>
+        <% } %>
+    </section>
+
+    <section class="user-events">
+        <h4>My Upcoming Events</h4>
+        <% if (events.length) { %>
+            <% const currentDate = new Date();
+               const futureEvents = events.filter(event => new Date(event.start) > currentDate); %>
             <% if (futureEvents.length) { %>
                 <% futureEvents.forEach(event => { %>
                     <div class="event-item">
-                        <div class="event-content">
+                        <div class="event-info">
                             <a href="/events/<%= event.id %>">
-                                <p>
-                                    <strong><%= event.title %></strong><br>
-                                    <%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
-                                </p>
+                                <p class="event-title"><%= event.title %></p>
+                                <p class="event-date"><%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
                             </a>
                         </div>
                         <div class="event-actions">
                             <form action="/events/<%= event.id %>/edit" method="GET">
-                                <button type="submit" aria-label="Edit Event">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </button>
+                                <button type="submit">Edit</button>
                             </form>
                             <form action="/events/<%= event.id %>?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
-                                <button type="submit" aria-label="Delete Event">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
+                                <button type="submit">Delete</button>
                             </form>
                         </div>
-                    </div>                    
+                    </div>
                 <% }); %>
             <% } else { %>
                 <p>You don't have any upcoming events.</p>
             <% } %>
-        </section>
+        <% } else { %>
+            <p>You aren't hosting any events.</p>
+        <% } %>
+    </section>
 
-        <section class="user-events">
-            <h4>My Past Events</h4>
+    <section class="user-events">
+        <h4>My Past Events</h4>
+        <% if (events.length) { %>
+            <% const pastEvents = events.filter(event => new Date(event.start) <= currentDate); %>
             <% if (pastEvents.length) { %>
                 <% pastEvents.forEach(event => { %>
                     <div class="event-item">
-                        <div class="event-content">
+                        <div class="event-info">
                             <a href="/events/<%= event.id %>">
-                                <p>
-                                    <strong><%= event.title %></strong><br>
-                                    <%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
-                                </p>
+                                <p class="event-title"><%= event.title %></p>
+                                <p class="event-date"><%= new Date(event.start).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
                             </a>
                         </div>
                         <div class="event-actions">
                             <form action="/events/<%= event.id %>/edit" method="GET">
-                                <button type="submit" aria-label="Edit Event">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </button>
+                                <button type="submit">Edit</button>
                             </form>
-                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
-                                <button type="submit" aria-label="Delete Event">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
+                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
+                                <button type="submit">Delete</button>
                             </form>
                         </div>
                     </div>
-                 
                 <% }); %>
             <% } else { %>
                 <p>You don't have any past events.</p>
             <% } %>
-        </section>
-    <% } else { %>
-        <p>You aren't hosting any events.</p>
-    <% } %>
+        <% } else { %>
+            <p>You don't have any past events.</p>
+        <% } %>
+    </section>
 </main>
 
 <%- include('../partials/footer.ejs')%>
