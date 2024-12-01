@@ -1,4 +1,6 @@
 const model = require('../models/event');
+const rsvp = require('../models/rsvp');
+
 
 exports.index = async (req, res, next) => {
     try {
@@ -48,12 +50,52 @@ exports.show = async (req, res, next) => {
 
         if(event) {
             let isHost = req.session.user && event.hostname && event.hostname._id.toString() === req.session.user._id;
-            res.render('./event/eventDetails', { event, isHost }); // Render event details view if found and pass 'isHost' value to view
+            let numberAttending = await rsvp.countDocuments({ event: eventId, status: 'YES'});
+            
+            res.render('./event/eventDetails', { event, isHost, numberAttending }); // Render event details view if found and pass 'isHost' value to view
         } else {
             let err = new Error('Cannot find an event with id ' + eventId);
             err.status = 404;
             next(err);
         }
+    } catch(err) {
+        next(err);
+    }
+};
+
+exports.handleRSVP = async (req, res, next) => {
+    try {
+        let userId = req.session.user._id;
+        let { id } = req.params; // event ID
+        let { status, source } = req.body; // RSVP status
+
+        if (!['YES', 'NO', 'MAYBE'].includes(status)) {
+            throw new Error('Invalid RSVP status.');
+        }
+
+        let event = await model.findById(id);
+        if (!event) {
+            throw new Error('Event not found.');
+        }
+
+        if (event.hostname.toString() === userId.toString()) {
+            throw new Error('You cannot RSVP for your own event.');
+        }
+        
+        await rsvp.findOneAndUpdate(
+            { user: userId, event: id },
+            { user: userId, event: id, status },
+            { upsert: true, new: true, runValidators: true }
+        );
+
+        req.flash('success', 'Your RSVP has been updated!');
+        // Redirect based on the source of the request
+        if (source === 'profile') {
+            res.redirect('/users/profile');
+        } else {
+            res.redirect(`/events/${id}`);
+        }
+
     } catch(err) {
         next(err);
     }
