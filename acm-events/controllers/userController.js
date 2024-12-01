@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Event = require('../models/event');
+const Rsvp = require('../models/rsvp');
 
 // Render new user sign-up page
 exports.showSignUp = (req, res) => {
@@ -64,14 +65,18 @@ exports.loginUser = async (req, res, next) => {
 // User profile controls
 exports.profile = async (req, res, next) => {
     try {
-        let userId = req.session.user;
+        let userId = req.session.user._id;
 
-        // Fetch user and user-created events simultaneously
-        let [user, events] = await Promise.all([
+        // Fetch user, user-created events, and RSVPs
+        let [user, events, rsvps] = await Promise.all([
             User.findById(userId),
-            Event.find({ hostname: userId })
+            Event.find({ hostname: userId }),
+            Rsvp.find({ user: userId }).populate('event')
         ]);
-        res.render('user/profile', { user, events });
+
+        const currentDate = new Date();
+
+        res.render('user/profile', { user, events, rsvps, currentDate });
     } catch(err) {
         next(err);
     }
