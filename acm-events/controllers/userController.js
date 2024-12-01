@@ -48,7 +48,12 @@ exports.loginUser = async (req, res, next) => {
             res.redirect('/users/login');
         }
 
-        req.session.user = user._id;
+        req.session.user = {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName
+        };
+        
         req.flash('success', 'You have sucessfully logged in.');
         res.redirect('/');
     } catch(err) {
