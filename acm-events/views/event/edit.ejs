@@ -3,7 +3,7 @@
 
     <main class="form-section">
         <h2>Edit Event</h2>
-        <form method="POST" action="/events/<%= event.id %>?_method=PUT" enctype="multipart/form-data">
+        <form method="POST" action="/events/<%= event.id %>?_method=PUT" enctype="multipart/form-data" onsubmit="return validateEventForm();">
 
             <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
             <select name="category" id="category" required>
@@ -15,25 +15,25 @@
             </select>
             
             <label for="title">Event Name <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="text" id="title" name="title" value="<%= event.title %>" required>
+            <input type="text" id="title" name="title" value="<%= event.title %>" maxlength="100" required>
 
             <label for="topic">Topic (Optional)</label>
-            <input type="text" id="topic" name="topic" value="<%= event.topic || '' %>">
+            <input type="text" id="topic" name="topic" value="<%= event.topic || '' %>" maxlength="100">
             
             <label for="speaker">Speaker(s) (Optional)</label>
-            <input type="text" id="speaker" name="speaker" value="<%= event.speaker || '' %>">
+            <input type="text" id="speaker" name="speaker" value="<%= event.speaker || '' %>" maxlength="100">
 
             <label for="details">Event Description <i class="fa-solid fa-circle-exclamation"></i></label>
-            <textarea name="details" id="details" rows="6" required minlength="10"><%= event.details %></textarea>
+            <textarea name="details" id="details" rows="6" minlength="10" required><%= event.details %></textarea>
             
             <label for="location">Location <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="text" id="location" name="location" value="<%= event.location %>" required>
+            <input type="text" id="location" name="location" value="<%= event.location %>" maxlength="100" required>
 
             <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="start" name="start" min="2024-01-01T00:00" value="<%= new Date(event.start).toISOString().slice(0, 16) %>" required>
-
+            <input type="datetime-local" id="start" name="start" min="<%= new Date().toISOString().slice(0, 16) %>" value="<%= new Date(event.start).toISOString().slice(0, 16) %>" required>
+    
             <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="end" name="end" min="2024-01-01T00:00" value="<%= new Date(event.end).toISOString().slice(0, 16) %>" required>
+            <input type="datetime-local" id="end" name="end" min="<%= new Date(event.start.getTime() + 60 * 60 * 1000).toISOString().slice(0, 16) %>" value="<%= new Date(event.end).toISOString().slice(0, 16) %>" required>
 
             <label for="currentImage">Current Image</label>
             <% if (event.image) { %>
@@ -45,7 +45,7 @@
             
             <label for="image">Update Image (Optional)</label>
             <input type="hidden" name="existingImage" value="<%= event.image ? 'true' : '' %>">
-            <input type="file" id="image" name="image" accept="image/*">
+            <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/gif">
 
             <button type="submit">Update Event</button>
 
