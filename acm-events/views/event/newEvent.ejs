@@ -3,7 +3,7 @@
 
     <main class="form-section">
         <h2>Propose a New Event</h2>
-        <form action="/events" method="POST" enctype="multipart/form-data">
+        <form action="/events" method="POST" enctype="multipart/form-data" onsubmit="return validateEventForm();">
 
             <label for="category">Category <i class="fa-solid fa-circle-exclamation"></i></label>
             <select name="category" id="category" required>
@@ -16,28 +16,28 @@
             </select>
             
             <label for="title">Event Name <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="text" id="title" name="title" placeholder="Enter proposed title" required>
+            <input type="text" id="title" name="title" placeholder="Enter proposed title" maxlength="255" required>
 
             <label for="topic">Topic (Optional)</label>
-            <input type="text" id="topic" name="topic" placeholder="Enter topic if applicable">
+            <input type="text" id="topic" name="topic" placeholder="Enter topic if applicable" maxlength="100">
             
             <label for="speaker">Speaker(s) (Optional)</label>
-            <input type="text" id="speaker" name="speaker" placeholder="Enter speaker name(s) if applicable">
+            <input type="text" id="speaker" name="speaker" placeholder="Enter speaker name(s) if applicable" maxlength="100">
 
             <label for="details">Event Description <i class="fa-solid fa-circle-exclamation"></i></label>
-            <textarea name="details" id="details" rows="6" placeholder="Please provide a description of the event" required></textarea>
+            <textarea name="details" id="details" rows="6" placeholder="Please provide a description of the event" minlength="10" required></textarea>
             
             <label for="location">Location <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="text" id="location" name="location" placeholder="Where will it take place" required>
+            <input type="text" id="location" name="location" placeholder="Where will it take place" maxlength="255" required>
 
             <label for="start">Start Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="start" name="start" min="2024-01-01T00:00" required>
+            <input type="datetime-local" id="start" name="start" min="<%= new Date().toISOString().slice(0, 16) %>" required>
 
             <label for="end">End Time <i class="fa-solid fa-circle-exclamation"></i></label>
-            <input type="datetime-local" id="end" name="end" min="2024-01-01T00:00" required>
+            <input type="datetime-local" id="end" name="end" min="<%= new Date().toISOString().slice(0, 16) %>" required>
 
             <label for="image">Supporting Image (Optional)</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/gif">
 
             <button type="submit">Create Event</button>
         </form>
