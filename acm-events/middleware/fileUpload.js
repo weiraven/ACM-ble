@@ -1,6 +1,4 @@
 const multer = require('multer');
-
-// tell multer to use in-memory storage rather than disk storage (/public/img)
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
