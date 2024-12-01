@@ -28,17 +28,21 @@
                         at 
                         <%= event.end.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) %>
                     </p>
-                    <p><strong>Details:</strong> <%= event.details %></p>                    
+                    <p><strong>Details:</strong> <%= event.details %></p>
+                    <p><strong>RSVPs:</strong> <%= numberAttending %></p>                    
                 </div>
             </section>
         </div>
         <div class="event-actions">
-            <!-- Add event to calendar (functionality not yet implemented) -->
-            <form>
-                <button type="submit" aria-label="Add to calendar">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </button>
-            </form>
+            <% if (!isHost) { %>
+                <!-- RSVP for event -->
+                <form action="/events/<%= event.id %>/rsvp" method="POST">
+                    <input type="hidden" name="source" value="eventDetails">
+                    <button type="submit" aria-label="RSVP for Event" onclick="showRSVPPopup(event)">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </button>
+                </form>
+            <% } %>
 
             <% if (isHost) { %>
                 <!-- Edit event -->
@@ -55,6 +59,19 @@
                     </button>
                 </form>
             <% } %>
+        </div>
+
+        <!-- RSVP Modal -->
+        <div id="rsvp-popup" class="rsvp-popup hidden">
+            <div class="rsvp-popup-content">
+                <h3>Will you attend this event?</h3>
+                <form action="/events/<%= event.id %>/rsvp" method="POST">
+                    <button type="submit" name="status" value="YES">Yes</button>
+                    <button type="submit" name="status" value="MAYBE">Maybe</button>
+                    <button type="submit" name="status" value="NO">No</button>
+                </form>
+                <button class="close-popup" onclick="hideRSVPPopup()">Close</button>
+            </div>
         </div>
     </main>
 

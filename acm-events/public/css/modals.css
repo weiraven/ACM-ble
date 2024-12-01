@@ -1,0 +1,79 @@
+/* RSVP pop-up styles */
+.rsvp-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.rsvp-popup-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    max-width: 250px;
+    width: 90%;
+}
+
+.rsvp-popup-content h3 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.rsvp-popup-content form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.rsvp-popup-content form button {
+    margin: 0;
+    padding: 10px 20px;
+    background: rgba(40, 103, 58, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+    font-weight: 500;
+    width: 200px;
+    text-align: center;
+}
+
+.rsvp-popup-content form button:nth-last-of-type(1) {
+    background: #7b7b7b; /* Change color for "No" button to match */
+}
+
+.rsvp-popup-content form button:hover {
+    background: rgba(149, 132, 80, 1);
+    transform: translateY(-2px); /* Subtle hover effect */
+}
+
+.rsvp-popup-content button.close-popup {
+    margin-top: 20px;
+    background: #aaaaaa;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.rsvp-popup-content button.close-popup:hover {
+    background: #bbb;
+}
