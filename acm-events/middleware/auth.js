@@ -30,7 +30,7 @@ exports.isHost = async (req, res, next) => {
             return next(err);
         }
 
-        if(event.hostname == req.session.user) {
+        if (event.hostname.toString() === req.session.user._id.toString()) {
             return next();
         } else {
             let err = new Error('You are not authorized to access this resource.');
