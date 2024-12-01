@@ -1,15 +1,3 @@
-// const path = require('path'); // do not need path if storing image directly into mongodb atlas
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, './public/img')
-//     },
-//     filename: (req, file, cb) => {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-//     }
-// });
-
 const multer = require('multer');
 
 // tell multer to use in-memory storage rather than disk storage (/public/img)
@@ -21,7 +9,7 @@ const fileFilter = (req, file, cb) => {
     if (mimeTypes.includes(file.mimetype)) {
         return cb(null, true);
     } else {
-        cb(new Error('Invalid file type: only jpg, png, and gif file types allowed'));
+        cb(new Error('Only JPG, PNG, and GIF images under 2MB are allowed.'));
     }
 }
 
