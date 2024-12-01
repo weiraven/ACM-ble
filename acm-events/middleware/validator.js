@@ -64,7 +64,7 @@ exports.validateEvent = [
     body('image')
         .optional()
         .custom((value) => {
-            const base64Pattern = /^data:image\/[a-zA-Z]+;base64,/;
+            const base64Pattern = /^[A-Za-z0-9+/]+={0,2}$/; // Match Base64 content
             if (value && !base64Pattern.test(value)) {
                 throw new Error('Image must be a valid Base64-encoded string.');
             }
@@ -82,11 +82,12 @@ exports.validateEvent = [
 
 exports.validateResult = (req, res, next) => {
     let errors = validationResult(req);
-    if(!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
         errors.array().forEach(error => {
             req.flash('error', error.msg);
         });
-        return res.redirect('back');
+        const referrer = req.get('Referrer') || '/';
+        return res.redirect(referrer); // Use Referrer header for safer redirects
     } else {
         return next();
     }
