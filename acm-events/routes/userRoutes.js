@@ -2,7 +2,8 @@
 const express = require('express');
 const controller = require('../controllers/userController');
 const { isGuest, isLoggedIn } = require('../middleware/auth');
-const { validatePassword } = require('../middleware/validator');
+const { validatePassword, validateSignUp, validateLogIn, validateResult } = require('../middleware/validator');
+const { logInLimiter } = require('../middleware/rateLimiters');
 
 const router = express.Router();
 
@@ -10,13 +11,13 @@ const router = express.Router();
 router.get('/new', isGuest, controller.showSignUp);
 
 // POST /users: create a new user account
-router.post('/', isGuest, validatePassword, controller.createUser);
+router.post('/', isGuest, validateSignUp, validateResult, validatePassword, controller.createUser);
 
 // GET /users/login: send view for logging in
 router.get('/login', isGuest, controller.showLogin);
 
 // POST /users/login: authenticate user login
-router.post('/login', isGuest, controller.loginUser);
+router.post('/login', isGuest, validateLogIn, validateResult, logInLimiter, controller.loginUser);
 
 // GET /users/profile: send user profile page
 router.get('/profile', isLoggedIn, controller.profile);
