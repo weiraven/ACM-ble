@@ -28,7 +28,7 @@ exports.newEvent = (req, res)=>{
 
 exports.create = async (req, res, next) => {
     try {
-        req.body.hostname = req.session.user;
+        req.body.hostname = req.session.user._id;
         // Create a new event with inputs from req.body and save to MongoDB
         let event = new model(req.body);    
         await event.save();
@@ -47,7 +47,7 @@ exports.show = async (req, res, next) => {
         let event = await model.findById(eventId).populate('hostname', 'firstName lastName');
 
         if(event) {
-            let isHost = req.session.user && event.hostname._id.toString() === req.session.user;
+            let isHost = req.session.user && event.hostname && event.hostname._id.toString() === req.session.user._id;
             res.render('./event/eventDetails', { event, isHost }); // Render event details view if found and pass 'isHost' value to view
         } else {
             let err = new Error('Cannot find an event with id ' + eventId);
