@@ -11,7 +11,7 @@ const eventSchema = new mongoose.Schema({
         required: [true, 'Event title is required']
     },
     hostname: {
-        type: Schema.Types.ObjectId, ref: 'User', required: [true, 'Host is required']
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', required: [true, 'Host is required']
     },
     topic: {
         type: String
