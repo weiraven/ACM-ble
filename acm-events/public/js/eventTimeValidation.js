@@ -1,5 +1,4 @@
 // Ensure end times are after start times
-
 document.addEventListener("DOMContentLoaded", function() {
     const startInput = document.getElementById('start');
     const endInput = document.getElementById('end');
@@ -22,3 +21,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+// Validate form on submission
+function validateEventForm() {
+    const startInput = document.getElementById('start');
+    const endInput = document.getElementById('end');
+    const startDate = new Date(startInput.value);
+    const endDate = new Date(endInput.value);
+
+    if (endDate < new Date(startDate.getTime() + 60 * 60 * 1000)) {
+        alert('End time must be at least 1 hour after the start time.');
+        return false;
+    }
+
+    return true;
+}
